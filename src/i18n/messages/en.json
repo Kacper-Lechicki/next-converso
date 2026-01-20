@@ -1,6 +1,10 @@
 {
-  "home": {
+  "Navbar": {
+    "companions": "Companions",
+    "my_journey": "My Journey"
+  },
+  "Home": {
     "title": "Welcome to my SaaS App",
-    "startButton": "Let's get started"
+    "start_button": "Let's get started"
   }
 }

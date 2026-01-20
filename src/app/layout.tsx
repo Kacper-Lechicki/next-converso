@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Bricolage_Grotesque } from 'next/font/google';
 
-import './globals.css';
+import '@/styles/globals.css';
 
 const bricolage = Bricolage_Grotesque({
   variable: '--font-bricolage',
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
+import Navbar from '@/components/layout/Navbar';
 
 export default async function RootLayout({
   children,
@@ -28,6 +29,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className={`${bricolage.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
+          <Navbar />
           {children}
         </NextIntlClientProvider>
       </body>
