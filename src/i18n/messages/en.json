@@ -3,23 +3,31 @@
     "companions": "Companions",
     "my_journey": "My Journey",
     "home": "Home",
-    "signIn": "Sign In",
-    "homeAlt": "converso home"
+    "sign_in": "Sign In",
+    "home_alt": "converso home"
   },
   "Home": {
-    "popularCompanions": "Popular Companions",
-    "additionalFeatures": "Additional Features",
-    "title": "Welcome to my SaaS App",
-    "start_button": "Let's get started"
+    "popular_companions": "Popular Companions",
+    "recently_completed_sessions": "Recently completed sessions"
   },
   "CompanionCard": {
-    "bookmarkAlt": "bookmark",
-    "durationAlt": "duration",
-    "launchLesson": "Launch Lesson",
+    "bookmark_alt": "bookmark",
+    "duration_alt": "duration",
+    "launch_lesson": "Launch Lesson",
     "minutes": "minutes"
   },
-  "Feature": {
-    "cta": "CTA",
-    "companionsList": "CompanionsList"
+  "CTA": {
+    "start_learning": "Start learning your way",
+    "build_and_personalize": "Build and Personalize Learning Companion",
+    "description": "Pick a name, subject, voice & personality - and start learning though voice conversations that feel natural and fun",
+    "cta_alt": "cta",
+    "plus_alt": "plus",
+    "build_new_companion": "Build a New Companion"
+  },
+  "CompanionsList": {
+    "lessons": "Lessons",
+    "subject": "Subject",
+    "duration": "Duration",
+    "clock_alt": "minutes"
   }
 }

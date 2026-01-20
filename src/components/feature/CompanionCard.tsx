@@ -2,11 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { ASSETS } from '@/constants/assets';
 import { Companion } from '@/types';
-
-import { useTranslations } from 'next-intl';
 
 const CompanionCard = ({
   id,
@@ -26,7 +25,7 @@ const CompanionCard = ({
         <button type="button" className="companion-bookmark">
           <Image
             src={ASSETS.icons.bookmark}
-            alt={t('bookmarkAlt')}
+            alt={t('bookmark_alt')}
             width={25}
             height={30}
             className="w-[12.5px] h-[15px]"
@@ -40,12 +39,12 @@ const CompanionCard = ({
       <div className="flex items-center gap-2">
         <Image
           src={ASSETS.icons.clock}
-          alt={t('durationAlt')}
+          alt={t('duration_alt')}
           width={27}
           height={27}
           className="w-[13.5px] h-[13.5px]"
         />
-        <p className="text-sm">
+        <p className="text-sm font-bold">
           {duration} {t('minutes')}
         </p>
       </div>
@@ -54,7 +53,7 @@ const CompanionCard = ({
         href={`/companions/${id}`}
         className="btn-primary w-full flex justify-center items-center"
       >
-        {t('launchLesson')}
+        {t('launch_lesson')}
       </Link>
     </article>
   );

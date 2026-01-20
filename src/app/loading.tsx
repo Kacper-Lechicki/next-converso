@@ -2,8 +2,8 @@ import { Spinner } from '@/components/ui/spinner';
 
 export default function Loading() {
   return (
-    <main className="flex h-screen w-screen items-center justify-center">
-      <Spinner size="lg" />
-    </main>
+    <div className="flex flex-1 items-center justify-center py-10">
+      <Spinner size="lg" className="animate-in fade-in zoom-in duration-300" />
+    </div>
   );
 }

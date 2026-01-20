@@ -8,12 +8,18 @@ import { cn } from '@/lib/utils';
 import { NAV_ITEMS } from '@/constants/navigation';
 import { NavbarItem } from '@/types';
 
-const NavbarItems = () => {
+const NavbarItems = ({
+  className,
+  onClick,
+}: {
+  className?: string;
+  onClick?: () => void;
+}) => {
   const pathname = usePathname();
   const t = useTranslations();
 
   return (
-    <nav className="flex items-center gap-4">
+    <nav className={cn('flex items-center gap-6', className)}>
       {NAV_ITEMS.map((item: NavbarItem) => {
         const isActive: boolean = pathname === item.href;
 
@@ -21,7 +27,11 @@ const NavbarItems = () => {
           <Link
             href={item.href}
             key={item.href}
-            className={cn(isActive && 'text-primary font-semibold')}
+            onClick={onClick}
+            className={cn(
+              'text-base font-medium transition-colors hover:text-primary',
+              isActive ? 'text-primary font-bold' : 'text-muted-foreground',
+            )}
           >
             {t(`Navbar.${item.labelKey}`)}
           </Link>
