@@ -10,7 +10,7 @@
     "start": "next start",
     "=== LINT / PRETTIER ===": "",
     "lint:eslint": "eslint",
-    "lint:prettier": "prettier",
+    "lint:prettier": "prettier --check .",
     "lint:staged": "lint-staged",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "=== TESTS ===": "",
