@@ -15,7 +15,7 @@
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "=== TESTS ===": "",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run --passWithNoTests"
   },
   "dependencies": {
     "@radix-ui/react-slot": "~1.2.4",
