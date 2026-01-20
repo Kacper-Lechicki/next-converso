@@ -3,6 +3,8 @@ import { Bricolage_Grotesque } from 'next/font/google';
 
 import '@/styles/globals.css';
 
+import favicon from '@/assets/favicon.ico';
+
 const bricolage = Bricolage_Grotesque({
   variable: '--font-bricolage',
   subsets: ['latin'],
@@ -11,6 +13,9 @@ const bricolage = Bricolage_Grotesque({
 export const metadata: Metadata = {
   title: 'Converso',
   description: 'Real-time AI Teaching Platform',
+  icons: {
+    icon: favicon.src,
+  },
 };
 
 import { NextIntlClientProvider } from 'next-intl';

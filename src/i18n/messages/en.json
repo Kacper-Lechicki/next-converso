@@ -1,10 +1,25 @@
 {
   "Navbar": {
     "companions": "Companions",
-    "my_journey": "My Journey"
+    "my_journey": "My Journey",
+    "home": "Home",
+    "signIn": "Sign In",
+    "homeAlt": "converso home"
   },
   "Home": {
+    "popularCompanions": "Popular Companions",
+    "additionalFeatures": "Additional Features",
     "title": "Welcome to my SaaS App",
     "start_button": "Let's get started"
+  },
+  "CompanionCard": {
+    "bookmarkAlt": "bookmark",
+    "durationAlt": "duration",
+    "launchLesson": "Launch Lesson",
+    "minutes": "minutes"
+  },
+  "Feature": {
+    "cta": "CTA",
+    "companionsList": "CompanionsList"
   }
 }

@@ -5,7 +5,8 @@ import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
-import { NAV_ITEMS, NavbarItem } from '@/lib/constants';
+import { NAV_ITEMS } from '@/constants/navigation';
+import { NavbarItem } from '@/types';
 
 const NavbarItems = () => {
   const pathname = usePathname();
