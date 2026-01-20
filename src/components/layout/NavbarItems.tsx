@@ -15,7 +15,7 @@ const NavbarItems = () => {
   return (
     <nav className="flex items-center gap-4">
       {NAV_ITEMS.map((item: NavbarItem) => {
-        const isActive: boolean = pathname.startsWith(item.href);
+        const isActive: boolean = pathname === item.href;
 
         return (
           <Link

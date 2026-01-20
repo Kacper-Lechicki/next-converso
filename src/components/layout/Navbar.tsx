@@ -1,12 +1,14 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { ASSETS } from '@/constants/assets';
 import NavbarItems from '@/components/layout/NavbarItems';
-import { getTranslations } from 'next-intl/server';
 
-const Navbar = async () => {
-  const t = await getTranslations('Navbar');
+const Navbar = () => {
+  const t = useTranslations('Navbar');
 
   return (
     <nav className="navbar">

@@ -1,12 +1,14 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { ASSETS } from '@/constants/assets';
 import { Companion } from '@/types';
 
-import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 
-const CompanionCard = async ({
+const CompanionCard = ({
   id,
   name,
   topic,
@@ -14,14 +16,14 @@ const CompanionCard = async ({
   duration,
   color,
 }: Companion) => {
-  const t = await getTranslations('CompanionCard');
+  const t = useTranslations('CompanionCard');
 
   return (
     <article className="companion-card" style={{ backgroundColor: color }}>
       <div className="flex justify-between items-center">
         <div className="subject-badge">{subject}</div>
 
-        <button className="companion-bookmark">
+        <button type="button" className="companion-bookmark">
           <Image
             src={ASSETS.icons.bookmark}
             alt={t('bookmarkAlt')}
