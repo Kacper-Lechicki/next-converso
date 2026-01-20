@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+
 import NavbarItems from '@/components/layout/NavbarItems';
 
 const Navbar = () => {
@@ -20,7 +21,7 @@ const Navbar = () => {
 
       <div className="flex items-center gap-8">
         <NavbarItems />
-        <p>Sign In</p>
+        <Link href="/sign-in">Sign In</Link>
       </div>
     </nav>
   );
