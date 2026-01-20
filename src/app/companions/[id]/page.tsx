@@ -1,13 +1,14 @@
-interface CompanionSessionPageParams {
+type CompanionSessionPageParams = {
   id: string;
+};
+
+interface CompanionSessionPageProps {
+  params: Promise<CompanionSessionPageParams>;
 }
 
-const CompanionSessionPage = ({
-  params,
-}: {
-  params: CompanionSessionPageParams;
-}) => {
-  return <div>CompanionSessionPage: {JSON.stringify(params)}</div>;
+const CompanionSessionPage = async ({ params }: CompanionSessionPageProps) => {
+  const resolvedParams = await params;
+  return <div>CompanionSessionPage: {JSON.stringify(resolvedParams)}</div>;
 };
 
 export default CompanionSessionPage;
