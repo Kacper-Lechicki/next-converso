@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useForm } from 'react-hook-form';
+import { Resolver, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import {
@@ -35,14 +35,16 @@ const formSchema = z.object({
   topic: z.string().min(1, { message: 'Topic is required' }),
   voice: z.string().min(1, { message: 'Voice is required' }),
   style: z.string().min(1, { message: 'Style is required' }),
-  duration: z.number().min(1, { message: 'Duration is required' }),
+  duration: z.coerce.number().min(1, { message: 'Duration is required' }),
 });
+
+type FormValues = z.infer<typeof formSchema>;
 
 const CompanionForm = () => {
   const t = useTranslations('CompanionForm');
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema) as Resolver<FormValues>,
     defaultValues: {
       name: '',
       subject: '',
@@ -53,7 +55,7 @@ const CompanionForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = (values: FormValues) => {
     console.log(values);
   };
 

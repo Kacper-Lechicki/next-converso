@@ -5,6 +5,7 @@ import { Bricolage_Grotesque } from 'next/font/google';
 
 import '@/styles/globals.css';
 
+import Template from '@/app/template';
 import favicon from '@/assets/favicon.ico';
 import Navbar from '@/components/layout/Navbar';
 
@@ -53,7 +54,10 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <Navbar />
-          <main className="flex-1">{children}</main>
+
+          <main className="flex-1">
+            <Template>{children}</Template>
+          </main>
         </NextIntlClientProvider>
       </body>
     </html>

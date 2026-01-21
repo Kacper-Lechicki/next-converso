@@ -1,3 +1,5 @@
+'use client';
+
 import CompanionForm from '@/components/feature/CompanionForm';
 import { useTranslations } from 'next-intl';
 
