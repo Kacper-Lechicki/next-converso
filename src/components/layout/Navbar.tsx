@@ -1,5 +1,6 @@
 'use client';
 
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -31,12 +32,23 @@ const Navbar = () => {
       <div className="hidden md:flex items-center gap-8">
         <NavbarItems />
 
-        <Link
-          href="/sign-in"
-          className="btn-signin transition-colors hover:bg-primary hover:text-primary-foreground active:bg-primary/90"
-        >
-          {t('sign_in')}
-        </Link>
+        <SignedOut>
+          <SignInButton mode="modal">
+            <button className="btn-signin transition-colors hover:bg-primary hover:text-primary-foreground active:bg-primary/90">
+              {t('sign_in')}
+            </button>
+          </SignInButton>
+        </SignedOut>
+
+        <SignedIn>
+          <UserButton
+            appearance={{
+              elements: {
+                avatarBox: 'w-10 h-10',
+              },
+            }}
+          />
+        </SignedIn>
       </div>
 
       <button
@@ -54,13 +66,26 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           />
 
-          <Link
-            href="/sign-in"
-            className="btn-signin text-base px-8 py-3"
-            onClick={() => setIsOpen(false)}
-          >
-            {t('sign_in')}
-          </Link>
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button
+                className="btn-signin text-base px-8 py-3"
+                onClick={() => setIsOpen(false)}
+              >
+                {t('sign_in')}
+              </button>
+            </SignInButton>
+          </SignedOut>
+
+          <SignedIn>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: 'w-12 h-12',
+                },
+              }}
+            />
+          </SignedIn>
         </div>
       )}
     </nav>

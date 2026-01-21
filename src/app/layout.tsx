@@ -1,7 +1,9 @@
+import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { Bricolage_Grotesque } from 'next/font/google';
+import { Suspense } from 'react';
 
 import '@/styles/globals.css';
 
@@ -48,18 +50,22 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <body
-        className={`${bricolage.variable} flex min-h-screen flex-col antialiased`}
-      >
-        <NextIntlClientProvider messages={messages}>
-          <Navbar />
+    <Suspense fallback={null}>
+      <ClerkProvider appearance={{ variables: { colorPrimary: '#171717' } }}>
+        <html lang={locale}>
+          <body
+            className={`${bricolage.variable} flex min-h-screen flex-col antialiased`}
+          >
+            <NextIntlClientProvider messages={messages}>
+              <Navbar />
 
-          <main className="flex-1">
-            <Template>{children}</Template>
-          </main>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+              <main className="flex-1">
+                <Template>{children}</Template>
+              </main>
+            </NextIntlClientProvider>
+          </body>
+        </html>
+      </ClerkProvider>
+    </Suspense>
   );
 }

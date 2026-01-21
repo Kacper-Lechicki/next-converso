@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --primary: oklch(0.205 0 0);
+  --primary: #171717;
 
   --cta: #2c2c2c;
   --cta-gold: #fccc41;
