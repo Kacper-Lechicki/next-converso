@@ -6,7 +6,7 @@
     "sign_in": "Sign In",
     "home_alt": "converso home"
   },
-  "Home": {
+  "HomePage": {
     "popular_companions": "Popular Companions",
     "recently_completed_sessions": "Recently completed sessions"
   },
@@ -29,5 +29,27 @@
     "subject": "Subject",
     "duration": "Duration",
     "clock_alt": "minutes"
+  },
+  "NewCompanionPage": {
+    "companion_builder": "Companion Builder"
+  },
+  "CompanionForm": {
+    "companion_name": "Companion name",
+    "enter_companion_name": "Enter the companion name",
+    "subject": "Subject",
+    "select_subject": "Select the subject",
+    "what_to_help_with": "What should the companion help with?",
+    "help_example": "Ex. Derivatives & Integrals",
+    "voice": "Voice",
+    "select_voice": "Select the voice",
+    "male": "Male",
+    "female": "Female",
+    "style": "Style",
+    "select_style": "Select the style",
+    "formal": "Formal",
+    "casual": "Casual",
+    "duration": "Duration",
+    "estimated_duration": "Estimated session duration in minutes",
+    "build_your_companion": "Build Your Companion"
   }
 }

@@ -6,11 +6,11 @@ import CTA from '@/components/feature/CTA';
 import { Companion } from '@/types';
 import { POPULAR_COMPANIONS, RECENT_SESSIONS } from '@/mocks/companions';
 
-const Page = async () => {
-  const t = await getTranslations('Home');
+const HomePage = async () => {
+  const t = await getTranslations('HomePage');
 
   return (
-    <main>
+    <div className="flex flex-col gap-8">
       <h1 id="popular-heading" className="text-3xl">
         {t('popular_companions')}
       </h1>
@@ -30,8 +30,8 @@ const Page = async () => {
 
         <CTA />
       </section>
-    </main>
+    </div>
   );
 };
 
-export default Page;
+export default HomePage;

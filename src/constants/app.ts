@@ -1,4 +1,6 @@
-export const SUBJECTS = [
+import { Subject } from '@/types';
+
+export const SUBJECTS: Subject[] = [
   'maths',
   'language',
   'science',

@@ -1,8 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import {
   Table,
@@ -30,6 +30,7 @@ const CompanionsList = ({
   classNames,
 }: CompanionsListProps) => {
   const t = useTranslations('CompanionsList');
+  const router = useRouter();
   const displayTitle = title;
 
   return (
@@ -50,22 +51,24 @@ const CompanionsList = ({
 
         <TableBody>
           {companions?.map((companion: Companion) => (
-            <TableRow key={companion.id}>
+            <TableRow
+              key={companion.id}
+              className="cursor-pointer"
+              onClick={() => router.push(`/companions/${companion.id}`)}
+            >
               <TableCell>
-                <Link href={`/companions/${companion.id}`}>
-                  <div className="flex items-center gap-4">
-                    <SubjectBadge
-                      subject={companion.subject}
-                      classNames="size-[72px] max-md:hidden"
-                      size={35}
-                    />
+                <div className="flex items-center gap-4">
+                  <SubjectBadge
+                    subject={companion.subject}
+                    classNames="size-[72px] max-md:hidden"
+                    size={35}
+                  />
 
-                    <div className="flex flex-col gap-2">
-                      <p className="font-bold text-2xl">{companion.name}</p>
-                      <p className="text-sm">{companion.topic}</p>
-                    </div>
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold text-2xl">{companion.name}</p>
+                    <p className="text-sm">{companion.topic}</p>
                   </div>
-                </Link>
+                </div>
               </TableCell>
 
               <TableCell>
