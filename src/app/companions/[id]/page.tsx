@@ -7,8 +7,8 @@ interface CompanionSessionPageProps {
 }
 
 const CompanionSessionPage = async ({ params }: CompanionSessionPageProps) => {
-  const resolvedParams = await params;
-  return <div>CompanionSessionPage: {JSON.stringify(resolvedParams)}</div>;
+  const { id } = await params;
+  return <div>CompanionSessionPage: {JSON.stringify(id)}</div>;
 };
 
 export default CompanionSessionPage;

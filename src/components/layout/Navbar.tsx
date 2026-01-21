@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
-import { Menu, X } from 'lucide-react';
+import { useState } from 'react';
 
-import { ASSETS } from '@/constants/assets';
 import NavbarItems from '@/components/layout/NavbarItems';
+import { ASSETS } from '@/constants/assets';
 
 const Navbar = () => {
   const t = useTranslations('Navbar');
@@ -18,7 +18,7 @@ const Navbar = () => {
       <Link href="/" className="z-50" onClick={() => setIsOpen(false)}>
         <div className="flex items-center gap-2.5 transition-opacity hover:opacity-80">
           <Image
-            preload
+            priority
             src={ASSETS.logo}
             alt={t('home_alt')}
             width={46}

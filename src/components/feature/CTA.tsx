@@ -1,8 +1,8 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 
 import { ASSETS } from '@/constants/assets';
 
@@ -20,7 +20,7 @@ const CTA = () => {
         alt={t('cta_alt')}
         width={362}
         height={232}
-        preload
+        priority
         fetchPriority="high"
       />
 
