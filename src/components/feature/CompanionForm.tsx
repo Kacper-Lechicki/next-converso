@@ -95,7 +95,7 @@ const CompanionForm = () => {
                   value={field.value}
                   defaultValue={field.value}
                 >
-                  <SelectTrigger className="input capitalize">
+                  <SelectTrigger className="input capitalize cursor-pointer">
                     <SelectValue placeholder={t('select_subject')} />
                   </SelectTrigger>
 
@@ -104,7 +104,7 @@ const CompanionForm = () => {
                       <SelectItem
                         key={subject}
                         value={subject}
-                        className="capitalize"
+                        className="capitalize cursor-pointer"
                       >
                         {subject}
                       </SelectItem>
@@ -151,13 +151,18 @@ const CompanionForm = () => {
                   value={field.value}
                   defaultValue={field.value}
                 >
-                  <SelectTrigger className="input capitalize">
+                  <SelectTrigger className="input capitalize cursor-pointer">
                     <SelectValue placeholder={t('select_voice')} />
                   </SelectTrigger>
 
                   <SelectContent>
-                    <SelectItem value="male">{t('male')}</SelectItem>
-                    <SelectItem value="female">{t('female')}</SelectItem>
+                    <SelectItem className="cursor-pointer" value="male">
+                      {t('male')}
+                    </SelectItem>
+
+                    <SelectItem className="cursor-pointer" value="female">
+                      {t('female')}
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </FormControl>
@@ -180,13 +185,18 @@ const CompanionForm = () => {
                   value={field.value}
                   defaultValue={field.value}
                 >
-                  <SelectTrigger className="input capitalize">
+                  <SelectTrigger className="input capitalize cursor-pointer">
                     <SelectValue placeholder={t('select_style')} />
                   </SelectTrigger>
 
                   <SelectContent>
-                    <SelectItem value="formal">{t('formal')}</SelectItem>
-                    <SelectItem value="casual">{t('casual')}</SelectItem>
+                    <SelectItem className="cursor-pointer" value="formal">
+                      {t('formal')}
+                    </SelectItem>
+
+                    <SelectItem className="cursor-pointer" value="casual">
+                      {t('casual')}
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </FormControl>

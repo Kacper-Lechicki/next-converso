@@ -1,3 +1,4 @@
+import { enUS, plPL } from '@clerk/localizations';
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata, Viewport } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
@@ -18,6 +19,11 @@ const bricolage = Bricolage_Grotesque({
   display: 'swap',
   preload: true,
 });
+
+const clerkLocalizations: Record<string, typeof enUS> = {
+  en: enUS,
+  pl: plPL,
+};
 
 export const viewport: Viewport = {
   themeColor: '#171717',
@@ -68,6 +74,7 @@ export default async function RootLayout({
     <ClerkProvider
       appearance={{ variables: { colorPrimary: '#171717' } }}
       publishableKey={env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      localization={clerkLocalizations[locale] ?? enUS}
     >
       <html lang={locale}>
         <head>

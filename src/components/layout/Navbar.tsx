@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import NavbarItems from '@/components/layout/NavbarItems';
 import { ASSETS } from '@/constants/assets';
 import { cn } from '@/lib/utils';
@@ -64,6 +65,7 @@ const Navbar = () => {
           aria-label="Main navigation"
         >
           <NavbarItems />
+          <LanguageSwitcher />
 
           <SignedOut>
             <SignInButton mode="modal">
@@ -111,6 +113,8 @@ const Navbar = () => {
             className="flex-col text-xl gap-8"
             onClick={() => setIsOpen(false)}
           />
+
+          <LanguageSwitcher />
 
           <SignedOut>
             <SignInButton mode="modal">
