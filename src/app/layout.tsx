@@ -9,6 +9,7 @@ import '@/styles/globals.css';
 
 import Template from '@/app/template';
 import Navbar from '@/components/layout/Navbar';
+import { ScrollToTop } from '@/components/layout/ScrollToTop';
 import { env } from '@/lib/env';
 
 const bricolage = Bricolage_Grotesque({
@@ -92,6 +93,8 @@ export default async function RootLayout({
               <main className="flex-1">
                 <Template>{children}</Template>
               </main>
+
+              <ScrollToTop />
             </Suspense>
           </NextIntlClientProvider>
         </body>
