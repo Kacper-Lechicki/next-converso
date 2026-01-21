@@ -92,7 +92,7 @@ const CompanionsList = ({
                 <div className="flex items-center gap-2 w-full justify-end">
                   <p className="text-sm font-bold">
                     {companion.duration}{' '}
-                    <span className="max-md:hidden">mins</span>
+                    <span className="max-md:sr-only">min</span>
                   </p>
 
                   <Image

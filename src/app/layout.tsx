@@ -63,39 +63,35 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <Suspense fallback={null}>
-      <NextIntlClientProvider messages={messages}>
-        <ClerkProvider appearance={{ variables: { colorPrimary: '#171717' } }}>
-          <html lang={locale}>
-            <head>
-              <link
-                rel="preconnect"
-                href="https://fonts.googleapis.com"
-                crossOrigin="anonymous"
-              />
+    <ClerkProvider appearance={{ variables: { colorPrimary: '#171717' } }}>
+      <html lang={locale}>
+        <head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
 
-              <link
-                rel="preconnect"
-                href="https://fonts.gstatic.com"
-                crossOrigin="anonymous"
-              />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          />
 
-              <link rel="dns-prefetch" href="https://clerk.com" />
-              <link rel="preconnect" href="https://clerk.com" />
-            </head>
+          <link rel="dns-prefetch" href="https://clerk.com" />
+          <link rel="preconnect" href="https://clerk.com" />
+        </head>
 
-            <body
-              className={`${bricolage.variable} flex min-h-screen flex-col antialiased`}
-            >
+        <body
+          className={`${bricolage.variable} flex min-h-screen flex-col antialiased`}
+        >
+          <NextIntlClientProvider messages={messages}>
+            <Suspense fallback={null}>
               <Navbar />
 
               <main className="flex-1">
                 <Template>{children}</Template>
               </main>
-            </body>
-          </html>
-        </ClerkProvider>
-      </NextIntlClientProvider>
-    </Suspense>
+            </Suspense>
+          </NextIntlClientProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
