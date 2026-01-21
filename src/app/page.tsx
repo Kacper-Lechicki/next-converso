@@ -1,13 +1,15 @@
-import { getTranslations } from 'next-intl/server';
+'use client';
+
+import { useTranslations } from 'next-intl';
 
 import CompanionCard from '@/components/feature/CompanionCard';
 import CompanionsList from '@/components/feature/CompanionsList';
 import CTA from '@/components/feature/CTA';
-import { Companion } from '@/types';
 import { POPULAR_COMPANIONS, RECENT_SESSIONS } from '@/mocks/companions';
+import { Companion } from '@/types';
 
-const HomePage = async () => {
-  const t = await getTranslations('HomePage');
+const HomePage = () => {
+  const t = useTranslations('HomePage');
 
   return (
     <div className="flex flex-col gap-8">
@@ -15,13 +17,16 @@ const HomePage = async () => {
         {t('popular_companions')}
       </h1>
 
-      <section className="home-section">
+      <section className="home-section" aria-labelledby="popular-heading">
         {POPULAR_COMPANIONS.map((companion: Companion) => (
           <CompanionCard key={companion.id} {...companion} />
         ))}
       </section>
 
-      <section className="home-section">
+      <section
+        className="home-section"
+        aria-label={t('recently_completed_sessions')}
+      >
         <CompanionsList
           title={t('recently_completed_sessions')}
           companions={RECENT_SESSIONS}

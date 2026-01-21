@@ -10,9 +10,13 @@ const CTA = () => {
   const t = useTranslations('CTA');
 
   return (
-    <section className="cta-section">
+    <section className="cta-section" aria-labelledby="cta-heading">
       <div className="cta-badge">{t('start_learning')}</div>
-      <h2 className="text-3xl font-bold">{t('build_and_personalize')}</h2>
+
+      <h2 id="cta-heading" className="text-3xl font-bold">
+        {t('build_and_personalize')}
+      </h2>
+
       <p>{t('description')}</p>
 
       <Image
@@ -24,19 +28,21 @@ const CTA = () => {
         fetchPriority="high"
       />
 
-      <button className="btn-primary" type="button">
+      <Link
+        href="/companions/new"
+        className="btn-primary"
+        aria-label={t('build_new_companion')}
+      >
         <Image
           src={ASSETS.icons.plus}
           alt={t('plus_alt')}
           width={12}
           height={12}
+          aria-hidden="true"
           className="w-[12px] h-[12px]"
         />
-
-        <Link href="/companions/new">
-          <p>{t('build_new_companion')}</p>
-        </Link>
-      </button>
+        <span>{t('build_new_companion')}</span>
+      </Link>
     </section>
   );
 };
