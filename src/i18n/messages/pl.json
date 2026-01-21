@@ -1,0 +1,55 @@
+{
+  "Navbar": {
+    "companions": "Mentorzy",
+    "my_journey": "Moja Podróż",
+    "home": "Strona Główna",
+    "sign_in": "Zaloguj się",
+    "home_alt": "converso start"
+  },
+  "HomePage": {
+    "popular_companions": "Popularni Mentorzy",
+    "recently_completed_sessions": "Ostatnio zakończone sesje"
+  },
+  "CompanionCard": {
+    "bookmark_alt": "zakładka",
+    "duration_alt": "czas trwania",
+    "launch_lesson": "Rozpocznij lekcję",
+    "minutes": "minut"
+  },
+  "CTA": {
+    "start_learning": "Ucz się po swojemu",
+    "build_and_personalize": "Stwórz i spersonalizuj Mentora",
+    "description": "Wybierz imię, przedmiot, głos i osobowość - i zacznij naukę poprzez rozmowy głosowe, które są naturalne i zabawne",
+    "cta_alt": "cta",
+    "plus_alt": "plus",
+    "build_new_companion": "Stwórz Nowego Mentora"
+  },
+  "CompanionsList": {
+    "lessons": "Lekcje",
+    "subject": "Przedmiot",
+    "duration": "Czas trwania",
+    "clock_alt": "minuty"
+  },
+  "NewCompanionPage": {
+    "companion_builder": "Kreator Mentora"
+  },
+  "CompanionForm": {
+    "companion_name": "Imię Mentora",
+    "enter_companion_name": "Wpisz imię mentora",
+    "subject": "Przedmiot",
+    "select_subject": "Wybierz przedmiot",
+    "what_to_help_with": "W czym ma pomóc mentor?",
+    "help_example": "Np. Pochodne i Całki",
+    "voice": "Głos",
+    "select_voice": "Wybierz głos",
+    "male": "Męski",
+    "female": "Żeński",
+    "style": "Styl",
+    "select_style": "Wybierz styl",
+    "formal": "Formalny",
+    "casual": "Swobodny",
+    "duration": "Czas trwania",
+    "estimated_duration": "Szacowany czas sesji w minutach",
+    "build_your_companion": "Stwórz Mentora"
+  }
+}

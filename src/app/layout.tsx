@@ -1,3 +1,4 @@
+import { enUS, plPL } from '@clerk/localizations';
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata, Viewport } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
@@ -9,6 +10,8 @@ import '@/styles/globals.css';
 
 import Template from '@/app/template';
 import Navbar from '@/components/layout/Navbar';
+import { ScrollToTop } from '@/components/layout/ScrollToTop';
+import { env } from '@/lib/env';
 
 const bricolage = Bricolage_Grotesque({
   variable: '--font-bricolage',
@@ -16,6 +19,11 @@ const bricolage = Bricolage_Grotesque({
   display: 'swap',
   preload: true,
 });
+
+const clerkLocalizations: Record<string, typeof enUS> = {
+  en: enUS,
+  pl: plPL,
+};
 
 export const viewport: Viewport = {
   themeColor: '#171717',
@@ -63,7 +71,11 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <ClerkProvider appearance={{ variables: { colorPrimary: '#171717' } }}>
+    <ClerkProvider
+      appearance={{ variables: { colorPrimary: '#171717' } }}
+      publishableKey={env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      localization={clerkLocalizations[locale] ?? enUS}
+    >
       <html lang={locale}>
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -88,6 +100,8 @@ export default async function RootLayout({
               <main className="flex-1">
                 <Template>{children}</Template>
               </main>
+
+              <ScrollToTop />
             </Suspense>
           </NextIntlClientProvider>
         </body>
