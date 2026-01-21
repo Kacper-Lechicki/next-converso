@@ -1,11 +1,11 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useTranslations } from 'next-intl';
 
-import { cn } from '@/lib/utils';
 import { NAV_ITEMS } from '@/constants/navigation';
+import { cn } from '@/lib/utils';
 import { NavbarItem } from '@/types';
 
 const NavbarItems = ({
@@ -28,6 +28,7 @@ const NavbarItems = ({
             href={item.href}
             key={item.href}
             onClick={onClick}
+            aria-current={isActive ? 'page' : undefined}
             className={cn(
               'text-base font-medium transition-colors hover:text-primary',
               isActive ? 'text-primary font-bold' : 'text-muted-foreground',

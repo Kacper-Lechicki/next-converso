@@ -1,5 +1,5 @@
 export const ASSETS = {
-  logo: '/images/logo.svg',
+  logo: '/images/logo.png',
   favicon: '/favicon.ico',
   icons: {
     bookmark: '/icons/bookmark.svg',

@@ -1,8 +1,8 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 
 import { ASSETS } from '@/constants/assets';
 import { Companion } from '@/types';
@@ -22,13 +22,18 @@ const CompanionCard = ({
       <div className="flex justify-between items-center">
         <div className="subject-badge">{subject}</div>
 
-        <button type="button" className="companion-bookmark">
+        <button
+          type="button"
+          className="companion-bookmark"
+          aria-label={t('bookmark_alt')}
+        >
           <Image
             src={ASSETS.icons.bookmark}
             alt={t('bookmark_alt')}
             width={25}
             height={30}
             className="w-[12.5px] h-[15px]"
+            aria-hidden="true"
           />
         </button>
       </div>
@@ -43,6 +48,7 @@ const CompanionCard = ({
           width={27}
           height={27}
           className="w-[13.5px] h-[13.5px]"
+          aria-hidden="true"
         />
         <p className="text-sm font-bold">
           {duration} {t('minutes')}

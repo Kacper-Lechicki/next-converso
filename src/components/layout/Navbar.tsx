@@ -15,7 +15,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="navbar relative z-50">
+    <header className="navbar relative z-50" role="banner">
       <Link href="/" className="z-50" onClick={() => setIsOpen(false)}>
         <div className="flex items-center gap-2.5 transition-opacity hover:opacity-80">
           <Image
@@ -24,12 +24,15 @@ const Navbar = () => {
             alt={t('home_alt')}
             width={46}
             height={44}
-            className="w-[46px] h-auto"
+            className="w-[46px] h-[44px] rounded-xl"
           />
         </div>
       </Link>
 
-      <div className="hidden md:flex items-center gap-8">
+      <nav
+        className="hidden md:flex items-center gap-8"
+        aria-label="Main navigation"
+      >
         <NavbarItems />
 
         <SignedOut>
@@ -49,18 +52,30 @@ const Navbar = () => {
             }}
           />
         </SignedIn>
-      </div>
+      </nav>
 
       <button
         className="md:hidden z-50 p-2 text-foreground"
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle menu"
+        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={isOpen}
+        aria-controls="mobile-menu"
       >
-        {isOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+        {isOpen ? (
+          <X className="size-6" aria-hidden="true" />
+        ) : (
+          <Menu className="size-6" aria-hidden="true" />
+        )}
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 bg-background/95 backdrop-blur-sm p-4 animate-in fade-in slide-in-from-top-5 duration-200">
+        <div
+          id="mobile-menu"
+          className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 bg-background/95 backdrop-blur-sm p-4 animate-in fade-in slide-in-from-top-5 duration-200"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation"
+        >
           <NavbarItems
             className="flex-col text-lg gap-8"
             onClick={() => setIsOpen(false)}
@@ -88,7 +103,7 @@ const Navbar = () => {
           </SignedIn>
         </div>
       )}
-    </nav>
+    </header>
   );
 };
 

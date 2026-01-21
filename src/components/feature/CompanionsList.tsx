@@ -13,10 +13,10 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-import { Companion } from '@/types';
-import { cn } from '@/lib/utils';
-import { ASSETS } from '@/constants/assets';
 import SubjectBadge from '@/components/feature/SubjectBadge';
+import { ASSETS } from '@/constants/assets';
+import { cn } from '@/lib/utils';
+import { Companion } from '@/types';
 
 interface CompanionsListProps {
   title: string;
@@ -40,10 +40,15 @@ const CompanionsList = ({
       <Table className="mt-8">
         <TableHeader>
           <TableRow>
-            <TableHead className="text-lg w-2/3">{t('lessons')}</TableHead>
-            <TableHead className="text-lg">{t('subject')}</TableHead>
+            <TableHead scope="col" className="text-lg w-2/3">
+              {t('lessons')}
+            </TableHead>
 
-            <TableHead className="text-lg text-right">
+            <TableHead scope="col" className="text-lg text-center md:text-left">
+              {t('subject')}
+            </TableHead>
+
+            <TableHead scope="col" className="text-lg text-right">
               {t('duration')}
             </TableHead>
           </TableRow>
@@ -72,13 +77,13 @@ const CompanionsList = ({
               </TableCell>
 
               <TableCell>
-                <div className="subject-badge w-fit max-md:hidden">
+                <div className="subject-badge mx-auto md:mx-0 w-fit max-md:hidden">
                   {companion.subject}
                 </div>
 
                 <SubjectBadge
                   subject={companion.subject}
-                  classNames="w-fit p-2 md:hidden"
+                  classNames="w-fit p-2 mx-auto md:mx-auto md:hidden"
                   size={18}
                 />
               </TableCell>
@@ -96,6 +101,7 @@ const CompanionsList = ({
                     width={14}
                     height={14}
                     className="w-[14px] h-[14px] md:hidden"
+                    aria-hidden="true"
                   />
                 </div>
               </TableCell>

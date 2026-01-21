@@ -1,5 +1,5 @@
 import { ClerkProvider } from '@clerk/nextjs';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { Bricolage_Grotesque } from 'next/font/google';
@@ -8,7 +8,6 @@ import { Suspense } from 'react';
 import '@/styles/globals.css';
 
 import Template from '@/app/template';
-import favicon from '@/assets/favicon.ico';
 import Navbar from '@/components/layout/Navbar';
 
 const bricolage = Bricolage_Grotesque({
@@ -17,6 +16,12 @@ const bricolage = Bricolage_Grotesque({
   display: 'swap',
   preload: true,
 });
+
+export const viewport: Viewport = {
+  themeColor: '#171717',
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: {
@@ -36,8 +41,16 @@ export const metadata: Metadata = {
   authors: [{ name: 'Converso Team' }],
   creator: 'Converso Team',
   icons: {
-    icon: favicon.src,
-    apple: favicon.src,
+    icon: '/images/logo.png',
+    apple: '/images/logo.png',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Converso',
+    title: 'Converso | Real-time AI Teaching Platform',
+    description:
+      'Experience the future of education with Converso. Real-time AI teaching partners tailored to your learning style.',
   },
 };
 
@@ -51,21 +64,38 @@ export default async function RootLayout({
 
   return (
     <Suspense fallback={null}>
-      <ClerkProvider appearance={{ variables: { colorPrimary: '#171717' } }}>
-        <html lang={locale}>
-          <body
-            className={`${bricolage.variable} flex min-h-screen flex-col antialiased`}
-          >
-            <NextIntlClientProvider messages={messages}>
+      <NextIntlClientProvider messages={messages}>
+        <ClerkProvider appearance={{ variables: { colorPrimary: '#171717' } }}>
+          <html lang={locale}>
+            <head>
+              <link
+                rel="preconnect"
+                href="https://fonts.googleapis.com"
+                crossOrigin="anonymous"
+              />
+
+              <link
+                rel="preconnect"
+                href="https://fonts.gstatic.com"
+                crossOrigin="anonymous"
+              />
+
+              <link rel="dns-prefetch" href="https://clerk.com" />
+              <link rel="preconnect" href="https://clerk.com" />
+            </head>
+
+            <body
+              className={`${bricolage.variable} flex min-h-screen flex-col antialiased`}
+            >
               <Navbar />
 
               <main className="flex-1">
                 <Template>{children}</Template>
               </main>
-            </NextIntlClientProvider>
-          </body>
-        </html>
-      </ClerkProvider>
+            </body>
+          </html>
+        </ClerkProvider>
+      </NextIntlClientProvider>
     </Suspense>
   );
 }

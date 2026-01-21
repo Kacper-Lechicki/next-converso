@@ -17,13 +17,16 @@ const HomePage = () => {
         {t('popular_companions')}
       </h1>
 
-      <section className="home-section">
+      <section className="home-section" aria-labelledby="popular-heading">
         {POPULAR_COMPANIONS.map((companion: Companion) => (
           <CompanionCard key={companion.id} {...companion} />
         ))}
       </section>
 
-      <section className="home-section">
+      <section
+        className="home-section"
+        aria-label={t('recently_completed_sessions')}
+      >
         <CompanionsList
           title={t('recently_completed_sessions')}
           companions={RECENT_SESSIONS}
