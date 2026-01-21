@@ -9,6 +9,7 @@ import '@/styles/globals.css';
 
 import Template from '@/app/template';
 import Navbar from '@/components/layout/Navbar';
+import { env } from '@/lib/env';
 
 const bricolage = Bricolage_Grotesque({
   variable: '--font-bricolage',
@@ -63,7 +64,10 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <ClerkProvider appearance={{ variables: { colorPrimary: '#171717' } }}>
+    <ClerkProvider
+      appearance={{ variables: { colorPrimary: '#171717' } }}
+      publishableKey={env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
       <html lang={locale}>
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
