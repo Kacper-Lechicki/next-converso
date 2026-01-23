@@ -31,7 +31,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { SUBJECTS } from '@/constants/app';
 import { useServerAction } from '@/hooks/use-server-action';
 import { Subject } from '@/types';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 const formSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),
@@ -46,6 +46,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const CompanionForm = () => {
   const t = useTranslations('CompanionForm');
+  const router = useRouter();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema) as Resolver<FormValues>,
@@ -70,7 +71,9 @@ const CompanionForm = () => {
         toast.success(tSuccess('saved'));
 
         if (companion) {
-          redirect(`/companions/${companion.id}`);
+          router.push(`/companions/${companion.id}`);
+        } else {
+          router.push('/');
         }
       },
     });

@@ -9,6 +9,10 @@ export const createCompanion = async (
 ) => {
   const { userId: author } = await auth();
 
+  if (!author) {
+    throw new Error('User is not authenticated');
+  }
+
   const supabase = await createClient();
 
   const { data, error } = await supabase
