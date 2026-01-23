@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/table';
 
 import SubjectBadge from '@/components/feature/SubjectBadge';
-import { ASSETS } from '@/constants/assets';
+import { ASSETS } from '@/config/assets';
 import { cn } from '@/lib/utils';
 import { Companion } from '@/types';
 

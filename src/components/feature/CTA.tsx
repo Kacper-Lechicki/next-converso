@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ASSETS } from '@/constants/assets';
+import { ASSETS } from '@/config/assets';
 
 const CTA = async () => {
   const t = await getTranslations('CTA');

@@ -2,7 +2,9 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { Resolver, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import {
@@ -24,14 +26,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { toast } from 'sonner';
 
 import { createCompanion } from '@/actions/companion';
 import { Textarea } from '@/components/ui/textarea';
-import { SUBJECTS } from '@/constants/app';
+import { SUBJECTS } from '@/config/app';
 import { useServerAction } from '@/hooks/use-server-action';
 import { Subject } from '@/types';
-import { useRouter } from 'next/router';
 
 const formSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),

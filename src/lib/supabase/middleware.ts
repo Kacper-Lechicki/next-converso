@@ -1,7 +1,7 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
-import { env } from '@/lib/env';
+import { env } from '@/config/env';
 
 export const createClient = async (request: NextRequest) => {
   let supabaseResponse = NextResponse.next({

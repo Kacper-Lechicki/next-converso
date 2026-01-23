@@ -7,9 +7,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import NavbarItems from '@/components/layout/NavbarItems';
-import { ASSETS } from '@/constants/assets';
+import { ASSETS } from '@/config/assets';
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {

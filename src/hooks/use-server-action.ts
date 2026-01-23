@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTranslations } from 'next-intl';
 import { useState, useTransition } from 'react';
 import { toast } from 'sonner';
@@ -19,21 +18,13 @@ export const useServerAction = <T, R>(action: (data: T) => Promise<R>) => {
           setResult(res);
           options?.onSuccess?.(res);
           resolve(res);
-        } catch (error: any) {
-          if (error.message === 'NEXT_REDIRECT') {
+        } catch (error) {
+          if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
             throw error;
           }
 
-          let message = 'something_went_wrong';
-
-          if (error instanceof Error) {
-            const isKey =
-              !error.message.includes(' ') && error.message.length < 50;
-
-            if (isKey) {
-              message = error.message;
-            }
-          }
+          const message =
+            error instanceof Error ? error.message : 'something_went_wrong';
 
           toast.error(t(message));
           resolve(null);

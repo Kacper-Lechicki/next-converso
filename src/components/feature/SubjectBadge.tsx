@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { ASSETS } from '@/constants/assets';
+import { ASSETS } from '@/config/assets';
 import { cn, getSubjectColor } from '@/lib/utils';
 import { Subject } from '@/types';
 

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { NAV_ITEMS } from '@/constants/navigation';
+import { NAV_ITEMS } from '@/config/navigation';
 import { cn } from '@/lib/utils';
 import { NavbarItem } from '@/types';
 

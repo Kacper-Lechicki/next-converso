@@ -1,7 +1,7 @@
 import { auth } from '@clerk/nextjs/server';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 
-import { env } from '@/lib/env';
+import { env } from '@/config/env';
 
 export const createClient = () => {
   return createSupabaseClient(
