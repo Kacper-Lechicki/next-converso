@@ -51,5 +51,13 @@
     "duration": "Czas trwania",
     "estimated_duration": "Szacowany czas sesji w minutach",
     "build_your_companion": "Stwórz Mentora"
+  },
+  "Error": {
+    "something_went_wrong": "Coś poszło nie tak. Spróbuj ponownie później.",
+    "unauthorized": "Nie masz uprawnień do wykonania tej akcji.",
+    "not_found": "Żądany zasób nie został znaleziony."
+  },
+  "Success": {
+    "saved": "Zapisano pomyślnie!"
   }
 }

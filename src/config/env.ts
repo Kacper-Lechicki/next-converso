@@ -4,8 +4,11 @@ const envSchema = z.object({
   NODE_ENV: z
     .enum(['development', 'test', 'production'])
     .default('development'),
+  NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().min(1),
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
   CLERK_SECRET_KEY: z.string().min(1),
+  NEXT_PUBLIC_SUPABASE_URL: z.url().min(1),
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY: z.string().min(1),
 });
 
 const _env = envSchema.safeParse(process.env);

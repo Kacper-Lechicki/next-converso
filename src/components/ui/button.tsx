@@ -36,26 +36,35 @@ const buttonVariants = cva(
   },
 );
 
+import { Spinner } from '@/components/ui/spinner';
+
 function Button({
   className,
   variant = 'default',
   size = 'default',
   asChild = false,
+  isLoading,
   ...props
 }: React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
+    isLoading?: boolean;
   }) {
   const Comp = asChild ? Slot : 'button';
 
   return (
     <Comp
+      suppressHydrationWarning
       data-slot="button"
       data-variant={variant}
       data-size={size}
       className={cn(buttonVariants({ variant, size, className }))}
+      disabled={props.disabled || isLoading}
       {...props}
-    />
+    >
+      {isLoading && <Spinner className="mr-2" size="sm" />}
+      {props.children}
+    </Comp>
   );
 }
 

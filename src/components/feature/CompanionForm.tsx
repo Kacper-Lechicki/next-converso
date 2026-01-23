@@ -2,7 +2,9 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { Resolver, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import {
@@ -25,8 +27,10 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
+import { createCompanion } from '@/actions/companion';
 import { Textarea } from '@/components/ui/textarea';
-import { SUBJECTS } from '@/constants/app';
+import { SUBJECTS } from '@/config/app';
+import { useServerAction } from '@/hooks/use-server-action';
 import { Subject } from '@/types';
 
 const formSchema = z.object({
@@ -42,6 +46,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const CompanionForm = () => {
   const t = useTranslations('CompanionForm');
+  const router = useRouter();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema) as Resolver<FormValues>,
@@ -55,8 +60,23 @@ const CompanionForm = () => {
     },
   });
 
-  const onSubmit = (values: FormValues) => {
-    console.log(values);
+  const { run: createCompanionAction, isPending } =
+    useServerAction(createCompanion);
+
+  const tSuccess = useTranslations('Success');
+
+  const onSubmit = async (values: FormValues) => {
+    await createCompanionAction(values, {
+      onSuccess: (companion) => {
+        toast.success(tSuccess('saved'));
+
+        if (companion) {
+          router.push(`/companions/${companion.id}`);
+        } else {
+          router.push('/');
+        }
+      },
+    });
   };
 
   return (
@@ -89,29 +109,29 @@ const CompanionForm = () => {
             <FormItem>
               <FormLabel>{t('subject')}</FormLabel>
 
-              <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value}
-                  defaultValue={field.value}
-                >
+              <Select
+                onValueChange={field.onChange}
+                value={field.value}
+                defaultValue={field.value}
+              >
+                <FormControl>
                   <SelectTrigger className="input capitalize cursor-pointer">
                     <SelectValue placeholder={t('select_subject')} />
                   </SelectTrigger>
+                </FormControl>
 
-                  <SelectContent>
-                    {SUBJECTS.map((subject: Subject) => (
-                      <SelectItem
-                        key={subject}
-                        value={subject}
-                        className="capitalize cursor-pointer"
-                      >
-                        {subject}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormControl>
+                <SelectContent>
+                  {SUBJECTS.map((subject: Subject) => (
+                    <SelectItem
+                      key={subject}
+                      value={subject}
+                      className="capitalize cursor-pointer"
+                    >
+                      {subject}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
               <FormMessage />
             </FormItem>
@@ -145,27 +165,27 @@ const CompanionForm = () => {
             <FormItem>
               <FormLabel>{t('voice')}</FormLabel>
 
-              <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value}
-                  defaultValue={field.value}
-                >
+              <Select
+                onValueChange={field.onChange}
+                value={field.value}
+                defaultValue={field.value}
+              >
+                <FormControl>
                   <SelectTrigger className="input capitalize cursor-pointer">
                     <SelectValue placeholder={t('select_voice')} />
                   </SelectTrigger>
+                </FormControl>
 
-                  <SelectContent>
-                    <SelectItem className="cursor-pointer" value="male">
-                      {t('male')}
-                    </SelectItem>
+                <SelectContent>
+                  <SelectItem className="cursor-pointer" value="male">
+                    {t('male')}
+                  </SelectItem>
 
-                    <SelectItem className="cursor-pointer" value="female">
-                      {t('female')}
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
+                  <SelectItem className="cursor-pointer" value="female">
+                    {t('female')}
+                  </SelectItem>
+                </SelectContent>
+              </Select>
 
               <FormMessage />
             </FormItem>
@@ -179,27 +199,27 @@ const CompanionForm = () => {
             <FormItem>
               <FormLabel>{t('style')}</FormLabel>
 
-              <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value}
-                  defaultValue={field.value}
-                >
+              <Select
+                onValueChange={field.onChange}
+                value={field.value}
+                defaultValue={field.value}
+              >
+                <FormControl>
                   <SelectTrigger className="input capitalize cursor-pointer">
                     <SelectValue placeholder={t('select_style')} />
                   </SelectTrigger>
+                </FormControl>
 
-                  <SelectContent>
-                    <SelectItem className="cursor-pointer" value="formal">
-                      {t('formal')}
-                    </SelectItem>
+                <SelectContent>
+                  <SelectItem className="cursor-pointer" value="formal">
+                    {t('formal')}
+                  </SelectItem>
 
-                    <SelectItem className="cursor-pointer" value="casual">
-                      {t('casual')}
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
+                  <SelectItem className="cursor-pointer" value="casual">
+                    {t('casual')}
+                  </SelectItem>
+                </SelectContent>
+              </Select>
 
               <FormMessage />
             </FormItem>
@@ -227,7 +247,11 @@ const CompanionForm = () => {
           )}
         />
 
-        <Button className="cursor-pointer w-full" type="submit">
+        <Button
+          className="cursor-pointer w-full"
+          type="submit"
+          isLoading={isPending}
+        >
           {t('build_your_companion')}
         </Button>
       </form>

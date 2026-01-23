@@ -11,7 +11,9 @@ import '@/styles/globals.css';
 import Template from '@/app/template';
 import Navbar from '@/components/layout/Navbar';
 import { ScrollToTop } from '@/components/layout/ScrollToTop';
-import { env } from '@/lib/env';
+import { Toaster } from '@/components/ui/sonner';
+import { clerkAppearance } from '@/config/clerk';
+import { env } from '@/config/env';
 
 const bricolage = Bricolage_Grotesque({
   variable: '--font-bricolage',
@@ -72,7 +74,7 @@ export default async function RootLayout({
 
   return (
     <ClerkProvider
-      appearance={{ variables: { colorPrimary: '#171717' } }}
+      appearance={clerkAppearance}
       publishableKey={env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
       localization={clerkLocalizations[locale] ?? enUS}
     >
@@ -102,6 +104,7 @@ export default async function RootLayout({
               </main>
 
               <ScrollToTop />
+              <Toaster />
             </Suspense>
           </NextIntlClientProvider>
         </body>

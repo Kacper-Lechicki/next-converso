@@ -1,13 +1,11 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ASSETS } from '@/constants/assets';
+import { ASSETS } from '@/config/assets';
 import { Companion } from '@/types';
 
-const CompanionCard = ({
+const CompanionCard = async ({
   id,
   name,
   topic,
@@ -15,7 +13,7 @@ const CompanionCard = ({
   duration,
   color,
 }: Companion) => {
-  const t = useTranslations('CompanionCard');
+  const t = await getTranslations('CompanionCard');
 
   return (
     <article className="companion-card" style={{ backgroundColor: color }}>
@@ -57,7 +55,7 @@ const CompanionCard = ({
 
       <Link
         href={`/companions/${id}`}
-        className="btn-primary w-full flex justify-center items-center"
+        className="btn-primary h-12 w-full flex justify-center items-center"
       >
         {t('launch_lesson')}
       </Link>

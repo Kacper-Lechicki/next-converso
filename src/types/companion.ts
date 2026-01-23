@@ -26,6 +26,7 @@ export interface CreateCompanion {
   voice: string;
   style: string;
   duration: number;
+  author?: string;
 }
 
 export interface GetAllCompanions {

@@ -1,15 +1,15 @@
 'use client';
 
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import NavbarItems from '@/components/layout/NavbarItems';
-import { ASSETS } from '@/constants/assets';
+import { ASSETS } from '@/config/assets';
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
@@ -68,11 +68,12 @@ const Navbar = () => {
           <LanguageSwitcher />
 
           <SignedOut>
-            <SignInButton mode="modal">
-              <button className="btn-signin transition-colors hover:bg-primary hover:text-primary-foreground active:bg-primary/90">
-                {t('sign_in')}
-              </button>
-            </SignInButton>
+            <Link
+              href="/sign-in"
+              className="btn-signin transition-colors hover:bg-primary hover:text-primary-foreground active:bg-primary/90"
+            >
+              {t('sign_in')}
+            </Link>
           </SignedOut>
 
           <SignedIn>
@@ -117,14 +118,13 @@ const Navbar = () => {
           <LanguageSwitcher />
 
           <SignedOut>
-            <SignInButton mode="modal">
-              <button
-                className="btn-signin text-base px-8 py-3"
-                onClick={() => setIsOpen(false)}
-              >
-                {t('sign_in')}
-              </button>
-            </SignInButton>
+            <Link
+              href="/sign-in"
+              className="btn-signin text-base px-8 py-3"
+              onClick={() => setIsOpen(false)}
+            >
+              {t('sign_in')}
+            </Link>
           </SignedOut>
 
           <SignedIn>
