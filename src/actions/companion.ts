@@ -4,7 +4,9 @@ import { createClient } from '@/lib/supabase/server';
 import { CreateCompanion } from '@/types';
 import { auth } from '@clerk/nextjs/server';
 
-export const createCompanion = async (formData: CreateCompanion) => {
+export const createCompanion = async (
+  formData: Omit<CreateCompanion, 'author'>,
+) => {
   const { userId: author } = await auth();
 
   const supabase = await createClient();

@@ -11,6 +11,7 @@ import '@/styles/globals.css';
 import Template from '@/app/template';
 import Navbar from '@/components/layout/Navbar';
 import { ScrollToTop } from '@/components/layout/ScrollToTop';
+import { Toaster } from '@/components/ui/sonner';
 import { env } from '@/lib/env';
 
 const bricolage = Bricolage_Grotesque({
@@ -76,9 +77,9 @@ export const clerkAppearance = {
     borderRadius: '12px',
   },
   elements: {
-    rootBox: '!max-w-full !flex !justify-center !items-center',
+    rootBox: '!w-full !flex !justify-center !items-center',
     cardBox:
-      '!rounded-[24px] !border !border-black !shadow-none !bg-white !p-6 !w-full !max-w-[800px]',
+      '!rounded-[24px] !border !border-black !shadow-none !bg-white !p-6 !w-full !max-w-[1000px]',
     card: '!border-0 !shadow-none !bg-transparent',
     headerTitle: '!font-bold !text-2xl !text-black',
     formButtonPrimary:
@@ -105,7 +106,7 @@ export const clerkAppearance = {
     userPreviewMainIdentifier: '!font-semibold !text-black',
     userPreviewSecondaryIdentifier: '!text-gray-500 !text-sm',
     modalContent:
-      '!rounded-[24px] !border !border-black !shadow-none !bg-white !overflow-hidden',
+      '!rounded-[24px] !border !border-black !shadow-none !bg-white !overflow-hidden !w-full !max-w-[1000px] !mx-[16px]',
     modalCloseButton: '!rounded-full !text-black hover:!bg-gray-100',
     navbar: '!bg-white !border-r !border-gray-200 !rounded-l-[12px]',
     navbarButton:
@@ -118,7 +119,7 @@ export const clerkAppearance = {
     profileSectionTitleText: '!font-semibold !text-black',
     profileSectionContent: '!bg-white',
     profileSectionPrimaryButton:
-      '!bg-[#171717] !text-white !rounded-[24px] !shadow-none !font-medium',
+      '!bg-[#171717] !text-white !rounded-[24px] !shadow-none !font-medium !w-fit',
     accordionTriggerButton: '!rounded-[12px] hover:!bg-gray-100 !text-black',
     accordionContent: '!bg-white',
     formFieldSuccessText: '!text-green-600',
@@ -127,7 +128,7 @@ export const clerkAppearance = {
     tabListContainer: '!border-0 !gap-2',
     tabPanel: '!bg-white',
     badge:
-      '!bg-black !text-white !rounded-[24px] !text-xs !px-3 !py-1 !font-medium !border-0',
+      '!bg-black !text-white !rounded-[24px] !text-xs !px-3 !py-1 !font-medium !border-0 !w-fit',
     tagInputContainer: '!rounded-[24px] !border !border-black !bg-white',
     tagPillContainer:
       '!bg-black !text-white !rounded-[24px] !text-xs !px-2 !py-1',
@@ -137,6 +138,7 @@ export const clerkAppearance = {
     avatarBox: '!rounded-full !border !border-black',
     userButtonAvatarBox: '!rounded-full !border !border-black',
     navbarMobileMenuRow: '!rounded-t-[12px]',
+    activeDevice: '!flex !flex-col !gap-1',
   },
 };
 
@@ -180,6 +182,7 @@ export default async function RootLayout({
               </main>
 
               <ScrollToTop />
+              <Toaster />
             </Suspense>
           </NextIntlClientProvider>
         </body>

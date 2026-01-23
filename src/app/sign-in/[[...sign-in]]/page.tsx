@@ -6,8 +6,8 @@ const SignInPage = () => {
       <SignIn
         appearance={{
           elements: {
-            rootBox: 'mx-auto',
-            card: 'bg-background shadow-none border border-border',
+            rootBox: '!w-full',
+            cardBox: '!max-w-[600px]',
           },
         }}
       />
