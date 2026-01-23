@@ -25,9 +25,11 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
+import { createCompanion } from '@/actions/companion';
 import { Textarea } from '@/components/ui/textarea';
 import { SUBJECTS } from '@/constants/app';
 import { Subject } from '@/types';
+import { redirect } from 'next/navigation';
 
 const formSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),
@@ -55,8 +57,15 @@ const CompanionForm = () => {
     },
   });
 
-  const onSubmit = (values: FormValues) => {
-    console.log(values);
+  const onSubmit = async (values: FormValues) => {
+    const companion = await createCompanion(values);
+
+    if (companion) {
+      redirect(`/companions/${companion.id}`);
+    } else {
+      console.error('Failed to create a companion');
+      redirect('/');
+    }
   };
 
   return (

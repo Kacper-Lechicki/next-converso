@@ -30,7 +30,7 @@ const NavbarItems = ({
             onClick={onClick}
             aria-current={isActive ? 'page' : undefined}
             className={cn(
-              'font-medium transition-colors hover:text-primary',
+              'font-medium transition-colors hover:text-primary whitespace-nowrap',
               isActive ? 'text-primary font-bold' : 'text-muted-foreground',
             )}
           >

@@ -1,13 +1,11 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { ASSETS } from '@/constants/assets';
 
-const CTA = () => {
-  const t = useTranslations('CTA');
+const CTA = async () => {
+  const t = await getTranslations('CTA');
 
   return (
     <section className="cta-section" aria-labelledby="cta-heading">
@@ -30,7 +28,7 @@ const CTA = () => {
 
       <Link
         href="/companions/new"
-        className="btn-primary"
+        className="btn-primary h-12"
         aria-label={t('build_new_companion')}
       >
         <Image

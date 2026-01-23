@@ -1,6 +1,4 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
 import CompanionCard from '@/components/feature/CompanionCard';
 import CompanionsList from '@/components/feature/CompanionsList';
@@ -8,8 +6,8 @@ import CTA from '@/components/feature/CTA';
 import { POPULAR_COMPANIONS, RECENT_SESSIONS } from '@/mocks/companions';
 import { Companion } from '@/types';
 
-const HomePage = () => {
-  const t = useTranslations('HomePage');
+const HomePage = async () => {
+  const t = await getTranslations('HomePage');
 
   return (
     <div className="flex flex-col gap-8">
