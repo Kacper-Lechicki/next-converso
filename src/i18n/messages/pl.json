@@ -59,5 +59,24 @@
   },
   "Success": {
     "saved": "Zapisano pomyślnie!"
+  },
+  "SearchInput": {
+    "placeholder": "Wyszukaj mentorów...",
+    "search_alt": "szukaj"
+  },
+  "SubjectFilter": {
+    "placeholder": "Przedmiot",
+    "all_subjects": "Wszystkie przedmioty",
+    "maths": "Matematyka",
+    "language": "Języki obce",
+    "science": "Nauki ścisłe",
+    "history": "Historia",
+    "coding": "Programowanie",
+    "economics": "Ekonomia"
+  },
+  "CompanionsPage": {
+    "title": "Biblioteka Mentorów",
+    "meta_title": "Biblioteka Mentorów | Converso",
+    "meta_description": "Przeglądaj i wybierz swojego mentora AI."
   }
 }

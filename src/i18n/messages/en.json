@@ -59,5 +59,24 @@
   },
   "Success": {
     "saved": "Saved successfully!"
+  },
+  "SearchInput": {
+    "placeholder": "Search companions...",
+    "search_alt": "search"
+  },
+  "SubjectFilter": {
+    "placeholder": "Subject",
+    "all_subjects": "All subjects",
+    "maths": "Maths",
+    "language": "Language",
+    "science": "Science",
+    "history": "History",
+    "coding": "Coding",
+    "economics": "Economics"
+  },
+  "CompanionsPage": {
+    "title": "Companions Library",
+    "meta_title": "Companions Library | Converso",
+    "meta_description": "Browse and select your AI learning companion."
   }
 }
