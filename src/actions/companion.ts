@@ -1,7 +1,7 @@
 'use server';
 
 import { createClient } from '@/lib/supabase/server';
-import { CreateCompanion } from '@/types';
+import { CreateCompanion, GetAllCompanions } from '@/types';
 import { auth } from '@clerk/nextjs/server';
 
 export const createCompanion = async (
@@ -13,7 +13,7 @@ export const createCompanion = async (
     throw new Error('User is not authenticated');
   }
 
-  const supabase = await createClient();
+  const supabase = createClient();
 
   const { data, error } = await supabase
     .from('companions')
@@ -26,4 +26,40 @@ export const createCompanion = async (
   }
 
   return data;
+};
+
+export const getAllCompanions = async ({
+  limit = 10,
+  page = 1,
+  subject,
+  topic,
+}: GetAllCompanions) => {
+  const supabase = createClient();
+
+  const safeLimit = Math.min(Math.max(1, limit), 50);
+  const safePage = Math.max(1, page);
+  const offset = (safePage - 1) * safeLimit;
+
+  let query = supabase.from('companions').select('*');
+
+  const subjectTerm = Array.isArray(subject) ? subject[0] : subject;
+  const topicTerm = Array.isArray(topic) ? topic[0] : topic;
+
+  if (subjectTerm) {
+    query = query.ilike('subject', `%${subjectTerm}%`);
+  }
+
+  if (topicTerm) {
+    query = query.or(`topic.ilike.%${topicTerm}%,name.ilike.%${topicTerm}%`);
+  }
+
+  const { data: companions, error } = await query
+    .order('created_at', { ascending: false })
+    .range(offset, offset + safeLimit - 1);
+
+  if (error) {
+    throw new Error(error?.message || 'Failed to fetch companions');
+  }
+
+  return companions || [];
 };

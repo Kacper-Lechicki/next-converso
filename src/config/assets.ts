@@ -5,6 +5,7 @@ export const ASSETS = {
     bookmark: '/icons/bookmark.svg',
     clock: '/icons/clock.svg',
     plus: '/icons/plus.svg',
+    search: '/icons/search.svg',
   },
   images: {
     cta: '/images/cta.svg',
