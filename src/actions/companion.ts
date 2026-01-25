@@ -53,13 +53,12 @@ export const getAllCompanions = async ({
     query = query.or(`topic.ilike.%${topicTerm}%,name.ilike.%${topicTerm}%`);
   }
 
-  const { data: companions, error } = await query.range(
-    offset,
-    offset + safeLimit - 1,
-  );
+  const { data: companions, error } = await query
+    .order('created_at', { ascending: false })
+    .range(offset, offset + safeLimit - 1);
 
   if (error) {
-    throw new Error('Failed to fetch companions');
+    throw new Error(error?.message || 'Failed to fetch companions');
   }
 
   return companions || [];

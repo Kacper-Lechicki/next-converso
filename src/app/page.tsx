@@ -15,7 +15,7 @@ const HomePage = async () => {
         {t('popular_companions')}
       </h1>
 
-      <section className="home-section" aria-labelledby="popular-heading">
+      <section className="companions-grid" aria-labelledby="popular-heading">
         {POPULAR_COMPANIONS.map((companion: Companion) => (
           <CompanionCard key={companion.id} {...companion} />
         ))}

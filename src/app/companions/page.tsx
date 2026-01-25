@@ -26,10 +26,10 @@ const CompanionsLibraryPage = async ({ searchParams }: SearchParams) => {
 
   return (
     <div className="flex flex-col gap-8">
-      <section className="flex flex-col lg:flex-row justify-between gap-6 lg:items-center">
+      <section className="flex flex-col xl:flex-row justify-between gap-6 xl:items-center">
         <h1 className="text-3xl font-bold">{t('title')}</h1>
 
-        <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+        <div className="flex flex-col sm:flex-row gap-4 w-full xl:w-auto">
           <div className="w-full sm:w-[320px]">
             <SearchInput />
           </div>

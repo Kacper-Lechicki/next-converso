@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { ASSETS } from '@/config/assets';
 
@@ -14,6 +14,14 @@ const SearchInput = () => {
   const searchParams = useSearchParams();
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleSearch = (query: string) => {
     if (timeoutRef.current) {
