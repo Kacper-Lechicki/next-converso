@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { CreateCompanion, GetAllCompanions } from '@/types';
 import { auth } from '@clerk/nextjs/server';
+import { z } from 'zod';
 
 export const createCompanion = async (
   formData: Omit<CreateCompanion, 'author'>,
@@ -62,4 +63,28 @@ export const getAllCompanions = async ({
   }
 
   return companions || [];
+};
+
+export const getCompanion = async (id: string) => {
+  const uuidSchema = z.string().uuid('Invalid companion ID format');
+  const validationResult = uuidSchema.safeParse(id);
+
+  if (!validationResult.success) {
+    return null;
+  }
+
+  const validatedId = validationResult.data;
+  const supabase = createClient();
+
+  const { data: companion, error } = await supabase
+    .from('companions')
+    .select('*')
+    .eq('id', validatedId)
+    .maybeSingle();
+
+  if (error) {
+    return null;
+  }
+
+  return companion ?? null;
 };

@@ -78,5 +78,18 @@
     "title": "Companions Library",
     "meta_title": "Companions Library | Converso",
     "meta_description": "Browse and select your AI learning companion."
+  },
+  "CompanionSessionPage": {
+    "minutes": "minutes",
+    "minutes_short": "min",
+    "duration_alt": "duration",
+    "mic_on": "Turn off microphone",
+    "mic_off": "Turn on microphone",
+    "mic_alt": "microphone",
+    "start_session": "Start Session",
+    "end_session": "End Session",
+    "connecting": "Connecting...",
+    "listening": "Listening...",
+    "transcript_placeholder": "Transcript will appear here..."
   }
 }

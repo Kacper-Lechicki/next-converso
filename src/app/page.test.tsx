@@ -8,7 +8,7 @@ vi.mock('next-intl', () => ({
 vi.mock('@/mocks/companions', () => ({
   POPULAR_COMPANIONS: [
     {
-      id: '1',
+      id: '550e8400-e29b-41d4-a716-446655440100',
       name: 'Test Companion 1',
       topic: 'Topic 1',
       subject: 'science',
@@ -16,7 +16,7 @@ vi.mock('@/mocks/companions', () => ({
       color: '#fff',
     },
     {
-      id: '2',
+      id: '550e8400-e29b-41d4-a716-446655440101',
       name: 'Test Companion 2',
       topic: 'Topic 2',
       subject: 'maths',
@@ -26,7 +26,7 @@ vi.mock('@/mocks/companions', () => ({
   ],
   RECENT_SESSIONS: [
     {
-      id: '3',
+      id: '550e8400-e29b-41d4-a716-446655440102',
       name: 'Recent 1',
       topic: 'Recent Topic',
       subject: 'coding',

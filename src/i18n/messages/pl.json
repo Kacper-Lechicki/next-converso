@@ -78,5 +78,18 @@
     "title": "Biblioteka Mentorów",
     "meta_title": "Biblioteka Mentorów | Converso",
     "meta_description": "Przeglądaj i wybierz swojego mentora AI."
+  },
+  "CompanionSessionPage": {
+    "minutes": "minut",
+    "minutes_short": "min",
+    "duration_alt": "czas trwania",
+    "mic_on": "Wyłącz mikrofon",
+    "mic_off": "Włącz mikrofon",
+    "mic_alt": "mikrofon",
+    "start_session": "Rozpocznij sesję",
+    "end_session": "Zakończ sesję",
+    "connecting": "Łączenie...",
+    "listening": "Słucham...",
+    "transcript_placeholder": "Tutaj pojawi się transkrypcja..."
   }
 }
