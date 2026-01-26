@@ -36,7 +36,7 @@ const CompanionSessionPage = async ({ params }: CompanionSessionPageProps) => {
     <div className="flex flex-col gap-6 w-full min-w-0">
       <article className="relative flex flex-row items-center gap-4 sm:gap-6 p-5 sm:p-6 overflow-hidden bg-white rounded-[2rem] border border-black shadow-sm">
         <SubjectBadge
-          subject={companion.subject}
+          subject={companion.subject ?? 'maths'}
           classNames="max-md:hidden size-[50px] sm:size-[60px] shrink-0 rounded-2xl text-xl transition-transform hover:scale-105"
           size={30}
         />
