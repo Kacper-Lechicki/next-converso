@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -81,12 +81,14 @@ describe('LanguageSwitcher', () => {
    * 4. Assert that `setLocale` mock was called with 'pl'.
    * This confirms the component correctly communicates with the backend action.
    */
-  it('calls setLocale when a new language is selected', () => {
+  it('calls setLocale when a new language is selected', async () => {
     render(<LanguageSwitcher />);
 
     const plOption = screen.getByText('Polski');
 
-    fireEvent.click(plOption);
+    await act(async () => {
+      fireEvent.click(plOption);
+    });
 
     expect(mockSetLocale).toHaveBeenCalledWith('pl');
   });
