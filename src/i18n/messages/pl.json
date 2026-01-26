@@ -6,6 +6,9 @@
     "sign_in": "Zaloguj się",
     "home_alt": "converso start"
   },
+  "Common": {
+    "back": "Wróć"
+  },
   "HomePage": {
     "popular_companions": "Popularni Mentorzy",
     "recently_completed_sessions": "Ostatnio zakończone sesje"
@@ -78,5 +81,19 @@
     "title": "Biblioteka Mentorów",
     "meta_title": "Biblioteka Mentorów | Converso",
     "meta_description": "Przeglądaj i wybierz swojego mentora AI."
+  },
+  "CompanionSessionPage": {
+    "minutes": "minut",
+    "minutes_short": "min",
+    "duration_alt": "czas trwania",
+    "mic_on": "Wyłącz mikrofon",
+    "mic_off": "Włącz mikrofon",
+    "mic_alt": "mikrofon",
+    "start_session": "Rozpocznij sesję",
+    "end_session": "Zakończ sesję",
+    "connecting": "Łączenie...",
+    "listening": "Słucham...",
+    "transcript_placeholder": "Tutaj pojawi się transkrypcja...",
+    "download_transcript": "Pobierz transkrypcję"
   }
 }

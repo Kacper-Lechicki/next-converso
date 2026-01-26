@@ -11,6 +11,13 @@ export enum MessageRoleEnum {
   ASSISTANT = 'assistant',
 }
 
+export enum CallStatus {
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+  CONNECTING = 'connecting',
+  FINISHED = 'finished',
+}
+
 export enum TranscriptMessageTypeEnum {
   PARTIAL = 'partial',
   FINAL = 'final',

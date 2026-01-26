@@ -8,8 +8,15 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   useEffect(() => {
+    if (
+      typeof window !== 'undefined' &&
+      'scrollRestoration' in window.history
+    ) {
+      window.history.scrollRestoration = 'manual';
+    }
+
     window.scrollTo(0, 0);
-  }, []);
+  }, [pathname]);
 
   return (
     <motion.div

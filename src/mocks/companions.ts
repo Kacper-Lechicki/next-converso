@@ -2,7 +2,7 @@ import { Companion } from '@/types';
 
 export const POPULAR_COMPANIONS: Companion[] = [
   {
-    id: '123',
+    id: '550e8400-e29b-41d4-a716-446655440000',
     name: 'Neura the Brainy Explorer',
     topic: 'Neural Network of the Brain',
     subject: 'science',
@@ -11,7 +11,7 @@ export const POPULAR_COMPANIONS: Companion[] = [
     bookmarked: false,
   },
   {
-    id: '456',
+    id: '550e8400-e29b-41d4-a716-446655440001',
     name: 'Countsy the Number Wizard',
     topic: 'Derivatives & Integrals',
     subject: 'maths',
@@ -20,7 +20,7 @@ export const POPULAR_COMPANIONS: Companion[] = [
     bookmarked: false,
   },
   {
-    id: '789',
+    id: '550e8400-e29b-41d4-a716-446655440002',
     name: 'Verba the Vocabulary Builder',
     topic: 'English Literature',
     subject: 'language',
@@ -32,7 +32,7 @@ export const POPULAR_COMPANIONS: Companion[] = [
 
 export const RECENT_SESSIONS = [
   {
-    id: '1',
+    id: '550e8400-e29b-41d4-a716-446655440010',
     subject: 'science',
     name: 'Neura the Brainy Explorer',
     topic: 'Neural Network of the Brain',
@@ -40,7 +40,7 @@ export const RECENT_SESSIONS = [
     color: '#E5D0FF',
   },
   {
-    id: '2',
+    id: '550e8400-e29b-41d4-a716-446655440011',
     subject: 'maths',
     name: 'Countsy the Number Wizard',
     topic: 'Derivatives & Integrals',
@@ -48,7 +48,7 @@ export const RECENT_SESSIONS = [
     color: '#FFDA6E',
   },
   {
-    id: '3',
+    id: '550e8400-e29b-41d4-a716-446655440012',
     subject: 'language',
     name: 'Verba the Vocabulary Builder',
     topic: 'English Literature',
@@ -56,7 +56,7 @@ export const RECENT_SESSIONS = [
     color: '#BDE7FF',
   },
   {
-    id: '4',
+    id: '550e8400-e29b-41d4-a716-446655440013',
     subject: 'coding',
     name: 'Codey the Logic Hacker',
     topic: 'Intro to If-Else Statements',
@@ -64,7 +64,7 @@ export const RECENT_SESSIONS = [
     color: '#FFC8E4',
   },
   {
-    id: '5',
+    id: '550e8400-e29b-41d4-a716-446655440014',
     subject: 'history',
     name: 'Memo, the Memory Keeper',
     topic: 'World Wars: Causes & Consequences',
@@ -72,7 +72,7 @@ export const RECENT_SESSIONS = [
     color: '#FFECC8',
   },
   {
-    id: '6',
+    id: '550e8400-e29b-41d4-a716-446655440015',
     subject: 'economics',
     name: 'The Market Maestro',
     topic: 'The Basics of Supply & Demand',

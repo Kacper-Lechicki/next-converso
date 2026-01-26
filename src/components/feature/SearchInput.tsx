@@ -12,7 +12,6 @@ const SearchInput = () => {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {

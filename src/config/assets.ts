@@ -6,6 +6,8 @@ export const ASSETS = {
     clock: '/icons/clock.svg',
     plus: '/icons/plus.svg',
     search: '/icons/search.svg',
+    mic_on: '/icons/mic-on.svg',
+    mic_off: '/icons/mic-off.svg',
   },
   images: {
     cta: '/images/cta.svg',
