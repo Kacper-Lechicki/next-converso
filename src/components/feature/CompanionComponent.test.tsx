@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import CompanionComponent from './CompanionComponent';
@@ -117,9 +117,11 @@ describe('CompanionComponent', () => {
 
     expect(screen.getByText('AI Companion')).toBeInTheDocument();
     expect(screen.getByText('Test User')).toBeInTheDocument();
+
     expect(
       screen.getByRole('button', { name: 'start_session' }),
     ).toBeInTheDocument();
+
     expect(screen.getByText('transcript_placeholder')).toBeInTheDocument();
   });
 
@@ -134,9 +136,11 @@ describe('CompanionComponent', () => {
    */
   it('handles start session click', async () => {
     const { waitFor } = await import('@testing-library/react');
+
     render(<CompanionComponent {...defaultProps} />);
 
     const startButton = screen.getByRole('button', { name: 'start_session' });
+
     fireEvent.click(startButton);
 
     await waitFor(() => {
@@ -153,6 +157,7 @@ describe('CompanionComponent', () => {
    */
   it('calls vapi event listeners on mount', () => {
     render(<CompanionComponent {...defaultProps} />);
+
     expect(mockOn).toHaveBeenCalledWith('call-start', expect.any(Function));
     expect(mockOn).toHaveBeenCalledWith('message', expect.any(Function));
   });
@@ -167,8 +172,58 @@ describe('CompanionComponent', () => {
    */
   it('cleans up event listeners on unmount', () => {
     const { unmount } = render(<CompanionComponent {...defaultProps} />);
+
     unmount();
 
     expect(mockOff).toHaveBeenCalledWith('call-start', expect.any(Function));
+  });
+
+  /**
+   * TEST CASE: Merging Messages.
+   * HOW IT WORKS:
+   * 1. Render component.
+   * 2. Retrieve the 'message' event handler passed to `vapi.on`.
+   * 3. Simulate multiple consecutive transcripts from the same role.
+   * 4. Verify that they are displayed as a single merged message in the UI.
+   */
+  it('merges consecutive transcript messages from the same role', async () => {
+    const { waitFor } = await import('@testing-library/react');
+    render(<CompanionComponent {...defaultProps} />);
+
+    // Get the registered 'message' handler
+    const onMessageCall = mockOn.mock.calls.find(
+      (call) => call[0] === 'message',
+    );
+
+    expect(onMessageCall).toBeDefined();
+
+    // The handler is the second argument: vapi.on('message', handler)
+    const onMessage = onMessageCall![1];
+
+    // Simulate consecutive messages
+    const msg1 = {
+      type: 'transcript',
+      transcriptType: 'final',
+      role: 'assistant',
+      transcript: 'Hello',
+    };
+
+    const msg2 = {
+      type: 'transcript',
+      transcriptType: 'final',
+      role: 'assistant',
+      transcript: 'world',
+    };
+
+    // Execute handler
+    act(() => {
+      onMessage(msg1);
+      onMessage(msg2);
+    });
+
+    // Check for merged content
+    await waitFor(() => {
+      expect(screen.getByText('Hello world')).toBeInTheDocument();
+    });
   });
 });

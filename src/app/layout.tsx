@@ -34,6 +34,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
   title: {
     default: 'Converso | Real-time AI Teaching Platform',
     template: '%s | Converso',
@@ -80,14 +81,6 @@ export default async function RootLayout({
     >
       <html lang={locale}>
         <head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="anonymous"
-          />
-
           <link rel="dns-prefetch" href="https://clerk.com" />
           <link rel="preconnect" href="https://clerk.com" />
         </head>

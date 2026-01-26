@@ -98,6 +98,7 @@ describe('CompanionsList', () => {
 
     expect(screen.getByText('Companion One')).toBeInTheDocument();
     expect(screen.getByText('Companion Two')).toBeInTheDocument();
+
     // Two badges per item (desktop + mobile view) might render depending on css hidden classes,
     // but in JSDOM usually all are present unless stripped out.
     // The previous test logic expected 2 total instances of "Subject One".
@@ -148,6 +149,7 @@ describe('CompanionsList', () => {
    */
   it('renders empty list gracefully', () => {
     render(<CompanionsList title="Empty List" companions={[]} classNames="" />);
+
     expect(screen.getByText('Empty List')).toBeInTheDocument();
     expect(screen.queryByText('Companion One')).not.toBeInTheDocument();
   });

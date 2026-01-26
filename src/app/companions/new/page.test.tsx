@@ -16,6 +16,9 @@ const mockRedirect = vi.fn();
 
 vi.mock('next/navigation', () => ({
   redirect: (url: string) => mockRedirect(url),
+  useRouter: () => ({
+    back: vi.fn(),
+  }),
 }));
 
 vi.mock('next-intl/server', () => ({
@@ -23,6 +26,10 @@ vi.mock('next-intl/server', () => ({
     Promise.resolve((key: string) =>
       key === 'companion_builder' ? 'Builder' : key,
     ),
+}));
+
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
 }));
 
 // Mock Clerk auth.

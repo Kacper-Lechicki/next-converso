@@ -57,6 +57,7 @@ describe('CTA', () => {
    */
   it('renders CTA heading and description', async () => {
     const component = await CTA();
+
     render(component);
 
     expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument();
@@ -74,9 +75,11 @@ describe('CTA', () => {
    */
   it('renders the build new companion link', async () => {
     const component = await CTA();
+
     render(component);
 
     const link = screen.getByTestId('cta-link');
+
     expect(link).toHaveAttribute('href', '/companions/new');
     expect(screen.getByText('Build New')).toBeInTheDocument();
   });
@@ -90,9 +93,11 @@ describe('CTA', () => {
    */
   it('renders the main CTA image', async () => {
     const component = await CTA();
+
     render(component);
 
     const img = screen.getByAltText('cta_alt');
+
     expect(img).toBeInTheDocument();
   });
 });

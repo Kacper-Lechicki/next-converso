@@ -88,6 +88,7 @@ describe('SubjectFilter', () => {
    */
   it('renders the select filter', () => {
     render(<SubjectFilter />);
+
     expect(screen.getByTestId('select')).toBeInTheDocument();
     expect(screen.getByText('placeholder')).toBeInTheDocument();
   });
@@ -100,6 +101,7 @@ describe('SubjectFilter', () => {
    */
   it('renders all subjects as options', () => {
     render(<SubjectFilter />);
+
     expect(screen.getByText('all_subjects')).toBeInTheDocument();
     expect(screen.getByText('maths')).toBeInTheDocument();
     expect(screen.getByText('science')).toBeInTheDocument();
@@ -121,6 +123,7 @@ describe('SubjectFilter', () => {
     // Let's rely on standard DOM query inside the test id or just relax the display:none for test.
     // Or just render it visible for test.
     const select = screen.getByTestId('select').querySelector('select')!;
+
     fireEvent.change(select, { target: { value: 'science' } });
 
     expect(mockPush).toHaveBeenCalledWith(
@@ -140,6 +143,7 @@ describe('SubjectFilter', () => {
     render(<SubjectFilter />);
 
     const select = screen.getByTestId('select').querySelector('select')!;
+
     fireEvent.change(select, { target: { value: 'all' } });
 
     expect(mockPush).toHaveBeenCalledWith(

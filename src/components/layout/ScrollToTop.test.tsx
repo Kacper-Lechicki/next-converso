@@ -20,7 +20,9 @@ describe('ScrollToTop', () => {
    */
   it('is invisible initially', () => {
     render(<ScrollToTop />);
+
     const button = screen.getByLabelText('Scroll to top');
+
     expect(button).toHaveClass('invisible');
   });
 
@@ -38,6 +40,7 @@ describe('ScrollToTop', () => {
     fireEvent.scroll(window, { target: { scrollY: 200 } });
 
     const button = screen.getByLabelText('Scroll to top');
+
     expect(button).toHaveClass('visible');
   });
 
@@ -51,6 +54,7 @@ describe('ScrollToTop', () => {
    */
   it('scrolls window to top on click', () => {
     const scrollToMock = vi.fn();
+
     // Inject mock into window object
     window.scrollTo = scrollToMock;
 
@@ -60,6 +64,7 @@ describe('ScrollToTop', () => {
     fireEvent.scroll(window, { target: { scrollY: 200 } });
 
     const button = screen.getByLabelText('Scroll to top');
+
     fireEvent.click(button);
 
     expect(scrollToMock).toHaveBeenCalledWith({

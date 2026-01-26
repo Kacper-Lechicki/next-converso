@@ -2,9 +2,12 @@
 
 import { PricingTable } from '@clerk/nextjs';
 
+import BackButton from '@/components/ui/back-button';
+
 const SubscriptionPage = () => {
   return (
-    <div>
+    <div className="flex flex-col gap-4">
+      <BackButton className="w-fit" />
       <PricingTable />
     </div>
   );

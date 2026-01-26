@@ -50,6 +50,7 @@ describe('SearchInput', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
+
   /**
    * TEST CASE: Initial rendering.
    * HOW IT WORKS:
@@ -74,9 +75,11 @@ describe('SearchInput', () => {
    */
   it('debounces input and updates query params', async () => {
     vi.useFakeTimers();
+
     render(<SearchInput />);
 
     const input = screen.getByPlaceholderText('placeholder');
+
     // Simulate user typing
     fireEvent.change(input, { target: { value: 'test topic' } });
 
@@ -107,13 +110,16 @@ describe('SearchInput', () => {
    */
   it('removes topic parameter when input is cleared', async () => {
     vi.useFakeTimers();
+
     render(<SearchInput />);
 
     const input = screen.getByPlaceholderText('placeholder');
 
     // Simulate user typing something first to ensure we have a state to clear from
     fireEvent.change(input, { target: { value: 'abc' } });
+
     vi.advanceTimersByTime(500);
+
     expect(mockPush).toHaveBeenLastCalledWith(
       '/companions?topic=abc',
       expect.objectContaining({ scroll: false }),

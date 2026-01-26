@@ -85,6 +85,7 @@ describe('LanguageSwitcher', () => {
     render(<LanguageSwitcher />);
 
     const plOption = screen.getByText('Polski');
+
     fireEvent.click(plOption);
 
     expect(mockSetLocale).toHaveBeenCalledWith('pl');

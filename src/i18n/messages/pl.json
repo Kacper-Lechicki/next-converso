@@ -6,6 +6,9 @@
     "sign_in": "Zaloguj się",
     "home_alt": "converso start"
   },
+  "Common": {
+    "back": "Wróć"
+  },
   "HomePage": {
     "popular_companions": "Popularni Mentorzy",
     "recently_completed_sessions": "Ostatnio zakończone sesje"
@@ -90,6 +93,7 @@
     "end_session": "Zakończ sesję",
     "connecting": "Łączenie...",
     "listening": "Słucham...",
-    "transcript_placeholder": "Tutaj pojawi się transkrypcja..."
+    "transcript_placeholder": "Tutaj pojawi się transkrypcja...",
+    "download_transcript": "Pobierz transkrypcję"
   }
 }

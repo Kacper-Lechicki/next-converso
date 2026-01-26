@@ -1,16 +1,17 @@
 'use client';
 
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import { Download } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import soundwaves from '@/assets/soundwaves.json';
-import { configureAssistant, DEFAULT_STYLE, DEFAULT_VOICE } from '@/config/app';
 import { ASSETS } from '@/config/assets';
+import { useCompanionSession } from '@/hooks/use-companion-session';
+import { downloadTranscript } from '@/lib/download';
 import { cn, getSubjectColor } from '@/lib/utils';
-import { vapi } from '@/lib/vapi/vapi.sdk';
-import { CallStatus, Companion, Message, SavedMessage } from '@/types';
+import { CallStatus, Companion, SavedMessage } from '@/types';
 
 interface CompanionComponentProps extends Companion {
   userName: string;
@@ -29,10 +30,23 @@ const CompanionComponent = ({
   voice,
 }: CompanionComponentProps) => {
   const t = useTranslations('CompanionSessionPage');
-  const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [messages, setMessages] = useState<SavedMessage[]>([]);
+
+  const {
+    callStatus,
+    isSpeaking,
+    isMuted,
+    messages,
+    toggleMic,
+    startSession,
+    endSession,
+  } = useCompanionSession({
+    subject,
+    topic,
+    name,
+    userName,
+    style,
+    voice,
+  });
 
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -55,67 +69,8 @@ const CompanionComponent = ({
     }
   }, [isSpeaking]);
 
-  useEffect(() => {
-    const onCallStart = () => setCallStatus(CallStatus.ACTIVE);
-    const onCallEnd = () => setCallStatus(CallStatus.FINISHED);
-
-    const onMessage = (message: Message) => {
-      if (message.type === 'transcript' && message.transcriptType === 'final') {
-        const newMessage = { role: message.role, content: message.transcript };
-        setMessages((prev) => [...prev, newMessage]);
-      }
-    };
-
-    const onSpeechStart = () => setIsSpeaking(true);
-    const onSpeechEnd = () => setIsSpeaking(false);
-
-    const onError = (error: Error) => console.error('Vapi Error:', error);
-
-    vapi.on('call-start', onCallStart);
-    vapi.on('call-end', onCallEnd);
-    vapi.on('message', onMessage);
-    vapi.on('error', onError);
-    vapi.on('speech-start', onSpeechStart);
-    vapi.on('speech-end', onSpeechEnd);
-
-    return () => {
-      vapi.off('call-start', onCallStart);
-      vapi.off('call-end', onCallEnd);
-      vapi.off('message', onMessage);
-      vapi.off('error', onError);
-      vapi.off('speech-start', onSpeechStart);
-      vapi.off('speech-end', onSpeechEnd);
-    };
-  }, []);
-
-  const toggleMic = () => {
-    const newMutedState = !isMuted;
-    vapi.setMuted(newMutedState);
-    setIsMuted(newMutedState);
-  };
-
-  const handleCall = async () => {
-    try {
-      setCallStatus(CallStatus.CONNECTING);
-
-      const assistantOverrides = {
-        variableValues: { subject, topic, style },
-        clientMessages: ['transcript'],
-        serverMessages: [],
-      } as unknown as Parameters<typeof vapi.start>[1];
-
-      await vapi.start(
-        configureAssistant(voice ?? DEFAULT_VOICE, style ?? DEFAULT_STYLE),
-        assistantOverrides,
-      );
-    } catch {
-      setCallStatus(CallStatus.INACTIVE);
-    }
-  };
-
-  const handleDisconnect = () => {
-    setCallStatus(CallStatus.FINISHED);
-    vapi.stop();
+  const handleDownloadTranscript = () => {
+    downloadTranscript({ messages, userName, companionName: name });
   };
 
   const isLoading = callStatus === CallStatus.CONNECTING;
@@ -216,7 +171,7 @@ const CompanionComponent = ({
                 : 'bg-black hover:bg-black/80',
               isLoading && 'cursor-wait opacity-80',
             )}
-            onClick={isActive ? handleDisconnect : handleCall}
+            onClick={isActive ? endSession : startSession}
             disabled={isLoading}
           >
             {isLoading ? (
@@ -227,6 +182,17 @@ const CompanionComponent = ({
               t('start_session')
             )}
           </button>
+
+          {isFinished && messages.length > 0 && (
+            <button
+              type="button"
+              className="flex items-center justify-center p-4 rounded-2xl border border-black transition-all active:scale-95 bg-white hover:bg-gray-50 text-sm font-bold gap-2"
+              onClick={handleDownloadTranscript}
+            >
+              <Download className="w-4 h-4" />
+              {t('download_transcript')}
+            </button>
+          )}
         </div>
       </section>
 

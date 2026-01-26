@@ -6,6 +6,9 @@
     "sign_in": "Sign In",
     "home_alt": "converso home"
   },
+  "Common": {
+    "back": "Back"
+  },
   "HomePage": {
     "popular_companions": "Popular Companions",
     "recently_completed_sessions": "Recently completed sessions"
@@ -90,6 +93,7 @@
     "end_session": "End Session",
     "connecting": "Connecting...",
     "listening": "Listening...",
-    "transcript_placeholder": "Transcript will appear here..."
+    "transcript_placeholder": "Transcript will appear here...",
+    "download_transcript": "Download Transcript"
   }
 }

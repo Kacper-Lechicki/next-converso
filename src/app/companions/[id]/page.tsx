@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 import { getCompanion } from '@/actions/companion';
 import CompanionComponent from '@/components/feature/CompanionComponent';
 import SubjectBadge from '@/components/feature/SubjectBadge';
+import BackButton from '@/components/ui/back-button';
 import { ASSETS } from '@/config/assets';
 import { Companion } from '@/types';
 
@@ -34,6 +35,7 @@ const CompanionSessionPage = async ({ params }: CompanionSessionPageProps) => {
 
   return (
     <div className="flex flex-col gap-6 w-full min-w-0">
+      <BackButton className="w-fit" />
       <article className="relative flex flex-row items-center gap-4 sm:gap-6 p-5 sm:p-6 overflow-hidden bg-white rounded-[2rem] border border-black shadow-sm">
         <SubjectBadge
           subject={companion.subject ?? 'maths'}

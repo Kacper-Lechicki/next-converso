@@ -6,6 +6,7 @@ const clientEnvSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.string().min(1),
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY: z.string().min(1),
   NEXT_PUBLIC_VAPI_WEB_TOKEN: z.string().min(1),
+  NEXT_PUBLIC_APP_URL: z.string().url().default('http://localhost:3000'),
 });
 
 const clientEnvRaw = {
@@ -16,6 +17,7 @@ const clientEnvRaw = {
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY:
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY,
   NEXT_PUBLIC_VAPI_WEB_TOKEN: process.env.NEXT_PUBLIC_VAPI_WEB_TOKEN,
+  NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
 };
 
 const serverEnvSchema = z.object({

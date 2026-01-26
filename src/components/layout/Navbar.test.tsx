@@ -104,11 +104,13 @@ describe('Navbar', () => {
     render(<Navbar />);
 
     const menuButton = screen.getByLabelText(/open menu/i);
+
     fireEvent.click(menuButton);
 
     expect(screen.getByLabelText('Mobile navigation')).toBeInTheDocument();
 
     const closeButton = screen.getByLabelText(/close menu/i);
+
     fireEvent.click(closeButton);
 
     expect(

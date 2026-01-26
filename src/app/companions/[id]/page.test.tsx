@@ -25,6 +25,10 @@ vi.mock('next-intl/server', () => ({
     Promise.resolve((key: string) => (key === 'minutes' ? 'min' : key)),
 }));
 
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
+}));
+
 // Mock Clerk user fetching.
 vi.mock('@clerk/nextjs/server', () => ({
   currentUser: vi.fn(),
@@ -38,6 +42,9 @@ const mockRedirect: Mock<(url: string) => never> = vi.fn(() => {
 // Mock redirect to verify routing logic.
 vi.mock('next/navigation', () => ({
   redirect: (url: string) => mockRedirect(url),
+  useRouter: () => ({
+    back: vi.fn(),
+  }),
 }));
 
 // Mock children.
@@ -95,12 +102,15 @@ describe('CompanionSessionPage', () => {
     } as Awaited<ReturnType<typeof currentUser>>);
 
     const { getCompanion } = await import('@/actions/companion');
+
     vi.mocked(getCompanion).mockResolvedValue(null);
 
     try {
       await CompanionSessionPage({ params: Promise.resolve({ id: '1' }) });
     } catch (e) {
-      if ((e as Error).message !== 'NEXT_REDIRECT') throw e;
+      if ((e as Error).message !== 'NEXT_REDIRECT') {
+        throw e;
+      }
     }
 
     expect(mockRedirect).toHaveBeenCalledWith('/companions');

@@ -15,6 +15,16 @@ vi.mock('@clerk/nextjs', () => ({
   PricingTable: () => <div data-testid="pricing-table">Pricing Table</div>,
 }));
 
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({
+    back: vi.fn(),
+  }),
+}));
+
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => key,
+}));
+
 // 2. TEST SUITE
 describe('SubscriptionPage', () => {
   /**

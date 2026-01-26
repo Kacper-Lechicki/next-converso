@@ -43,6 +43,7 @@ describe('SubjectBadge', () => {
     render(<SubjectBadge subject="maths" size={35} />);
 
     const img = screen.getByAltText('maths');
+
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute('src', '/icons/maths.svg');
   });
@@ -57,6 +58,7 @@ describe('SubjectBadge', () => {
   it('applies the correct background color via inline style', () => {
     const { container } = render(<SubjectBadge subject="maths" size={35} />);
     const div = container.firstChild;
+
     expect(div).toHaveStyle({ backgroundColor: '#ff0000' });
   });
 
@@ -70,7 +72,9 @@ describe('SubjectBadge', () => {
     const { container } = render(
       <SubjectBadge subject="science" size={35} classNames="p-4" />,
     );
+
     const div = container.firstChild;
+
     expect(div).toHaveClass('p-4');
   });
 });
