@@ -1,7 +1,9 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import { createClient } from '@/lib/supabase/server';
-import { CreateCompanion, GetAllCompanions } from '@/types';
+import { Companion, CreateCompanion, GetAllCompanions } from '@/types';
 import { auth } from '@clerk/nextjs/server';
 import { z } from 'zod';
 
@@ -86,4 +88,66 @@ export const getCompanion = async (id: string) => {
   }
 
   return companion ?? null;
+};
+
+export const addToSessionHistory = async (companionId: string) => {
+  const { userId } = await auth();
+  const supabase = createClient();
+
+  const { data, error } = await supabase.from('session_history').insert({
+    companion_id: companionId,
+    user_id: userId,
+  });
+
+  if (error) {
+    return null;
+  }
+
+  revalidatePath('/');
+
+  return data;
+};
+
+export const getRecentSessions = async (limit = 10): Promise<Companion[]> => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('session_history')
+    .select('companions:companion_id (*)')
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    return [];
+  }
+
+  return data
+    .map(({ companions }) =>
+      Array.isArray(companions) ? companions[0] : companions,
+    )
+    .filter((params) => !!params) as Companion[];
+};
+
+export const getUserSessions = async (
+  userId: string,
+  limit = 10,
+): Promise<Companion[]> => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('session_history')
+    .select('companions:companion_id (*)')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    return [];
+  }
+
+  return data
+    .map(({ companions }) =>
+      Array.isArray(companions) ? companions[0] : companions,
+    )
+    .filter((params) => !!params) as Companion[];
 };

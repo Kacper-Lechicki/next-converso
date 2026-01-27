@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { addToSessionHistory } from '@/actions/companion';
+
 import { configureAssistant, DEFAULT_STYLE, DEFAULT_VOICE } from '@/config/app';
 import { vapi } from '@/lib/vapi/vapi.sdk';
 import { CallStatus, Message, SavedMessage } from '@/types';
@@ -11,6 +13,7 @@ interface UseCompanionSessionProps {
   userName: string;
   style?: string;
   voice?: string;
+  companionId: string;
 }
 
 export const useCompanionSession = ({
@@ -18,6 +21,7 @@ export const useCompanionSession = ({
   topic,
   style,
   voice,
+  companionId,
 }: UseCompanionSessionProps) => {
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -26,7 +30,11 @@ export const useCompanionSession = ({
 
   useEffect(() => {
     const onCallStart = () => setCallStatus(CallStatus.ACTIVE);
-    const onCallEnd = () => setCallStatus(CallStatus.FINISHED);
+
+    const onCallEnd = () => {
+      setCallStatus(CallStatus.FINISHED);
+      addToSessionHistory(companionId);
+    };
 
     const onMessage = (message: Message) => {
       if (message.type === 'transcript' && message.transcriptType === 'final') {
@@ -72,7 +80,7 @@ export const useCompanionSession = ({
       vapi.off('speech-start', onSpeechStart);
       vapi.off('speech-end', onSpeechEnd);
     };
-  }, []);
+  }, [companionId]);
 
   const toggleMic = () => {
     const newMutedState = !isMuted;
