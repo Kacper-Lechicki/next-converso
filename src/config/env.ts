@@ -25,6 +25,7 @@ const serverEnvSchema = z.object({
     .enum(['development', 'test', 'production'])
     .default('development'),
   CLERK_SECRET_KEY: z.string().min(1),
+  SENTRY_AUTH_TOKEN: z.string().min(1),
 });
 
 const isServer = typeof window === 'undefined';

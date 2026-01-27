@@ -1,4 +1,5 @@
 import withBundleAnalyzer from '@next/bundle-analyzer';
+import { withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
@@ -20,4 +21,15 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withBA(withNextIntl(nextConfig));
+export default withSentryConfig(withBA(withNextIntl(nextConfig)), {
+  org: 'personal-5di',
+  project: 'next-converso',
+  silent: !process.env.CI,
+  widenClientFileUpload: true,
+  webpack: {
+    automaticVercelMonitors: true,
+    treeshake: {
+      removeDebugLogging: true,
+    },
+  },
+});
