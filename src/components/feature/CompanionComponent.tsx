@@ -21,6 +21,7 @@ interface CompanionComponentProps extends Companion {
 }
 
 const CompanionComponent = ({
+  id,
   subject,
   topic,
   name,
@@ -46,6 +47,7 @@ const CompanionComponent = ({
     userName,
     style,
     voice,
+    companionId: id,
   });
 
   const lottieRef = useRef<LottieRefCurrentProps>(null);

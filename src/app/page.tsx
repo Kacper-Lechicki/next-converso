@@ -1,13 +1,17 @@
 import { getTranslations } from 'next-intl/server';
 
+import { getAllCompanions, getRecentSessions } from '@/actions/companion';
 import CompanionCard from '@/components/feature/CompanionCard';
 import CompanionsList from '@/components/feature/CompanionsList';
 import CTA from '@/components/feature/CTA';
-import { POPULAR_COMPANIONS, RECENT_SESSIONS } from '@/mocks/companions';
+import { getSubjectColor } from '@/lib/utils';
 import { Companion } from '@/types';
 
 const HomePage = async () => {
   const t = await getTranslations('HomePage');
+  const companions: Companion[] = (await getAllCompanions({ limit: 3 })) || [];
+  const recentSessionCompanions: Companion[] =
+    (await getRecentSessions(10)) || [];
 
   return (
     <div className="flex flex-col gap-8">
@@ -16,8 +20,12 @@ const HomePage = async () => {
       </h1>
 
       <section className="companions-grid" aria-labelledby="popular-heading">
-        {POPULAR_COMPANIONS.map((companion: Companion) => (
-          <CompanionCard key={companion.id} {...companion} />
+        {companions.map((companion: Companion) => (
+          <CompanionCard
+            key={companion.id}
+            {...companion}
+            color={getSubjectColor(companion.subject)}
+          />
         ))}
       </section>
 
@@ -27,7 +35,7 @@ const HomePage = async () => {
       >
         <CompanionsList
           title={t('recently_completed_sessions')}
-          companions={RECENT_SESSIONS}
+          companions={recentSessionCompanions}
           classNames="w-2/3 max-lg:w-full"
         />
 
