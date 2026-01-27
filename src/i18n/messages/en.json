@@ -80,7 +80,8 @@
   "CompanionsPage": {
     "title": "Companions Library",
     "meta_title": "Companions Library | Converso",
-    "meta_description": "Browse and select your AI learning companion."
+    "meta_description": "Browse and select your AI learning companion.",
+    "add_companion": "Add Companion"
   },
   "CompanionSessionPage": {
     "minutes": "minutes",

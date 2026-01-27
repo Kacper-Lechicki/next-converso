@@ -1,4 +1,8 @@
 import { getTranslations } from 'next-intl/server';
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { ASSETS } from '@/config/assets';
 
 import { getAllCompanions } from '@/actions/companion';
 import CompanionCard from '@/components/feature/CompanionCard';
@@ -34,6 +38,21 @@ const CompanionsLibraryPage = async ({ searchParams }: SearchParams) => {
           </div>
 
           <SubjectFilter />
+
+          <Link
+            href="/companions/new"
+            className="btn-primary w-fit justify-center whitespace-nowrap"
+          >
+            <Image
+              src={ASSETS.icons.plus}
+              alt=""
+              width={12}
+              height={12}
+              aria-hidden="true"
+              className="w-[12px] h-[12px]"
+            />
+            {t('add_companion')}
+          </Link>
         </div>
       </section>
 

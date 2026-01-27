@@ -80,7 +80,8 @@
   "CompanionsPage": {
     "title": "Biblioteka Mentorów",
     "meta_title": "Biblioteka Mentorów | Converso",
-    "meta_description": "Przeglądaj i wybierz swojego mentora AI."
+    "meta_description": "Przeglądaj i wybierz swojego mentora AI.",
+    "add_companion": "Dodaj Mentora"
   },
   "CompanionSessionPage": {
     "minutes": "minut",
