@@ -1,4 +1,5 @@
 import { ASSETS } from '@/config/assets';
+import { currentUser } from '@clerk/nextjs/server';
 import { getTranslations } from 'next-intl/server';
 
 import { getAllCompanions, getRecentSessions } from '@/actions/companion';
@@ -10,6 +11,7 @@ import { getSubjectColor } from '@/lib/utils';
 import { Companion } from '@/types';
 
 const HomePage = async () => {
+  const user = await currentUser();
   const t = await getTranslations('HomePage');
   const companions: Companion[] = (await getAllCompanions({ limit: 3 })) || [];
   const recentSessionCompanions: Companion[] =
@@ -43,6 +45,7 @@ const HomePage = async () => {
               key={companion.id}
               {...companion}
               color={getSubjectColor(companion.subject)}
+              currentUserId={user?.id}
             />
           ))
         )}

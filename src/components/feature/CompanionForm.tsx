@@ -27,7 +27,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-import { createCompanion } from '@/actions/companion';
+import { createCompanion, updateCompanion } from '@/actions/companion';
 import { Textarea } from '@/components/ui/textarea';
 import { SUBJECTS } from '@/config/app';
 import { useServerAction } from '@/hooks/use-server-action';
@@ -44,13 +44,18 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-const CompanionForm = () => {
+interface CompanionFormProps {
+  initialData?: FormValues | null;
+  companionId?: string;
+}
+
+const CompanionForm = ({ initialData, companionId }: CompanionFormProps) => {
   const t = useTranslations('CompanionForm');
   const router = useRouter();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema) as Resolver<FormValues>,
-    defaultValues: {
+    defaultValues: initialData || {
       name: '',
       subject: '',
       topic: '',
@@ -60,23 +65,46 @@ const CompanionForm = () => {
     },
   });
 
-  const { run: createCompanionAction, isPending } =
+  const { run: createCompanionAction, isPending: isCreating } =
     useServerAction(createCompanion);
 
+  const { run: updateCompanionAction, isPending: isUpdating } =
+    useServerAction(updateCompanion);
+
+  const isPending = isCreating || isUpdating;
   const tSuccess = useTranslations('Success');
 
   const onSubmit = async (values: FormValues) => {
-    await createCompanionAction(values, {
-      onSuccess: (companion) => {
-        toast.success(tSuccess('saved'));
+    if (initialData && companionId) {
+      await updateCompanionAction(
+        { ...values, id: companionId },
+        {
+          onSuccess: (companion) => {
+            toast.success(tSuccess('saved'));
+            router.push(`/companions/${companion.id}`);
+            router.refresh();
+          },
+          onError: () => {
+            toast.error(tSuccess('error_saving'));
+          },
+        },
+      );
+    } else {
+      await createCompanionAction(values, {
+        onSuccess: (companion) => {
+          toast.success(tSuccess('saved'));
 
-        if (companion) {
-          router.push(`/companions/${companion.id}`);
-        } else {
-          router.push('/');
-        }
-      },
-    });
+          if (companion) {
+            router.push(`/companions/${companion.id}`);
+          } else {
+            router.push('/');
+          }
+        },
+        onError: () => {
+          toast.error(tSuccess('error_saving'));
+        },
+      });
+    }
   };
 
   return (
@@ -252,7 +280,7 @@ const CompanionForm = () => {
           type="submit"
           isLoading={isPending}
         >
-          {t('build_your_companion')}
+          {initialData ? t('update_your_companion') : t('build_your_companion')}
         </Button>
       </form>
     </Form>

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { ASSETS } from '@/config/assets';
+import { currentUser } from '@clerk/nextjs/server';
 
 import { getAllCompanions } from '@/actions/companion';
 import CompanionCard from '@/components/feature/CompanionCard';
@@ -23,6 +24,7 @@ export async function generateMetadata() {
 }
 
 const CompanionsLibraryPage = async ({ searchParams }: SearchParams) => {
+  const user = await currentUser();
   const t = await getTranslations('CompanionsPage');
   const filters = await searchParams;
   const subject = filters.subject ? (filters.subject as string) : '';
@@ -74,6 +76,7 @@ const CompanionsLibraryPage = async ({ searchParams }: SearchParams) => {
               key={companion.id}
               {...companion}
               color={getSubjectColor(companion.subject)}
+              currentUserId={user?.id}
             />
           ))
         )}

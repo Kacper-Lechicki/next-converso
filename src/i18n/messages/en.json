@@ -60,7 +60,8 @@
     "casual": "Casual",
     "duration": "Duration",
     "estimated_duration": "Estimated session duration in minutes",
-    "build_your_companion": "Build Your Companion"
+    "build_your_companion": "Build Your Companion",
+    "update_your_companion": "Update Your Companion"
   },
   "Error": {
     "something_went_wrong": "Something went wrong. Please try again later.",
@@ -68,7 +69,8 @@
     "not_found": "The requested resource was not found."
   },
   "Success": {
-    "saved": "Saved successfully!"
+    "saved": "Saved successfully!",
+    "error_saving": "Failed to save changes."
   },
   "SearchInput": {
     "placeholder": "Search companions...",
@@ -114,5 +116,19 @@
     "my_companions": "My Companions",
     "no_companions_found": "No companions found",
     "no_companions_description": "You haven't created any custom companions yet."
+  },
+  "CompanionActions": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "companion_deleted": "Companion deleted successfully",
+    "delete_failed": "Failed to delete companion",
+    "delete_title": "Delete Companion",
+    "delete_description": "Are you sure you want to delete this companion? This action cannot be undone.",
+    "delete_confirm": "Delete",
+    "cancel": "Cancel"
+  },
+  "EditCompanionPage": {
+    "title": "Edit Companion",
+    "description": "Make changes to your AI learning companion"
   }
 }

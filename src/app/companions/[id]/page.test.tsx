@@ -18,6 +18,8 @@ import CompanionSessionPage from './page';
 // Mock data fetching action.
 vi.mock('@/actions/companion', () => ({
   getCompanion: vi.fn(),
+  deleteCompanion: vi.fn(),
+  updateCompanion: vi.fn(),
 }));
 
 vi.mock('next-intl/server', () => ({
@@ -129,6 +131,7 @@ describe('CompanionSessionPage', () => {
     const { currentUser } = await import('@clerk/nextjs/server');
 
     vi.mocked(currentUser).mockResolvedValue({
+      id: 'user_1',
       firstName: 'Test',
       imageUrl: '/img.png',
     } as Awaited<ReturnType<typeof currentUser>>);
@@ -137,6 +140,7 @@ describe('CompanionSessionPage', () => {
 
     vi.mocked(getCompanion).mockResolvedValue({
       id: '1',
+      author: 'user_2',
       name: 'My Buddy',
       subject: 'coding',
       topic: 'React',
