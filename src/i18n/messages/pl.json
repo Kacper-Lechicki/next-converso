@@ -94,7 +94,16 @@
     "end_session": "Zakończ sesję",
     "connecting": "Łączenie...",
     "listening": "Słucham...",
-    "transcript_placeholder": "Tutaj pojawi się transkrypcja...",
-    "download_transcript": "Pobierz transkrypcję"
+    "transcript_placeholder": "Tutaj pojawi się transkrypcja..."
+  },
+  "ProfilePage": {
+    "lessons_completed": "Ukończone lekcje",
+    "companions_created": "Stworzeni mentorzy",
+    "check_alt": "znacznik wyboru",
+    "cap_alt": "czapka",
+    "recent_sessions": "Ostatnie sesje",
+    "my_companions": "Moi mentorzy",
+    "no_companions_found": "Nie znaleziono mentorów",
+    "no_companions_description": "Nie stworzyłeś jeszcze żadnych własnych mentorów."
   }
 }

@@ -103,7 +103,16 @@
     "end_session": "End Session",
     "connecting": "Connecting...",
     "listening": "Listening...",
-    "transcript_placeholder": "Transcript will appear here...",
-    "download_transcript": "Download Transcript"
+    "transcript_placeholder": "Transcript will appear here..."
+  },
+  "ProfilePage": {
+    "lessons_completed": "Lessons completed",
+    "companions_created": "Companions created",
+    "check_alt": "checkmark",
+    "cap_alt": "cap",
+    "recent_sessions": "Recent Sessions",
+    "my_companions": "My Companions",
+    "no_companions_found": "No companions found",
+    "no_companions_description": "You haven't created any custom companions yet."
   }
 }

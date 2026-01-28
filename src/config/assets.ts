@@ -8,6 +8,8 @@ export const ASSETS = {
     search: '/icons/search.svg',
     mic_on: '/icons/mic-on.svg',
     mic_off: '/icons/mic-off.svg',
+    check: '/icons/check.svg',
+    cap: '/icons/cap.svg',
   },
   images: {
     cta: '/images/cta.svg',

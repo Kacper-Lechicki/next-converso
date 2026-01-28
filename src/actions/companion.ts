@@ -151,3 +151,20 @@ export const getUserSessions = async (
     )
     .filter((params) => !!params) as Companion[];
 };
+
+export const getUserCompanions = async (
+  userId: string,
+): Promise<Companion[]> => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('companions')
+    .select('*')
+    .eq('author', userId);
+
+  if (error) {
+    return [];
+  }
+
+  return (data as Companion[]) || [];
+};

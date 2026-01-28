@@ -24,12 +24,18 @@ interface CompanionsListProps {
   title: string;
   companions?: Companion[];
   classNames?: string;
+  emptyStateTitle?: string;
+  emptyStateDescription?: string;
+  emptyStateIcon?: string;
 }
 
 const CompanionsList = ({
   title,
   companions,
   classNames,
+  emptyStateTitle,
+  emptyStateDescription,
+  emptyStateIcon,
 }: CompanionsListProps) => {
   const t = useTranslations('CompanionsList');
   const router = useRouter();
@@ -42,9 +48,9 @@ const CompanionsList = ({
 
       {isEmpty ? (
         <EmptyState
-          title={t('no_sessions')}
-          description={t('no_sessions_description')}
-          icon={ASSETS.icons.clock}
+          title={emptyStateTitle || t('no_sessions')}
+          description={emptyStateDescription || t('no_sessions_description')}
+          icon={emptyStateIcon || ASSETS.icons.clock}
           className="mt-8 border-none shadow-none h-auto flex-1 bg-transparent"
         />
       ) : (
