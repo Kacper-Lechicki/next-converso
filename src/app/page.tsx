@@ -1,9 +1,11 @@
+import { ASSETS } from '@/config/assets';
 import { getTranslations } from 'next-intl/server';
 
 import { getAllCompanions, getRecentSessions } from '@/actions/companion';
 import CompanionCard from '@/components/feature/CompanionCard';
 import CompanionsList from '@/components/feature/CompanionsList';
 import CTA from '@/components/feature/CTA';
+import EmptyState from '@/components/feature/EmptyState';
 import { getSubjectColor } from '@/lib/utils';
 import { Companion } from '@/types';
 
@@ -13,6 +15,11 @@ const HomePage = async () => {
   const recentSessionCompanions: Companion[] =
     (await getRecentSessions(10)) || [];
 
+  const showPopularEmpty = !companions || companions.length === 0;
+
+  const showRecentEmpty =
+    !recentSessionCompanions || recentSessionCompanions.length === 0;
+
   return (
     <div className="flex flex-col gap-8">
       <h1 id="popular-heading" className="text-3xl">
@@ -20,13 +27,25 @@ const HomePage = async () => {
       </h1>
 
       <section className="companions-grid" aria-labelledby="popular-heading">
-        {companions.map((companion: Companion) => (
-          <CompanionCard
-            key={companion.id}
-            {...companion}
-            color={getSubjectColor(companion.subject)}
-          />
-        ))}
+        {showPopularEmpty ? (
+          <div className="col-span-full">
+            <EmptyState
+              title={t('no_popular_companions')}
+              description={t('no_popular_companions_description')}
+              icon={ASSETS.icons.search} // Use 'search' icon for general exploration
+              actionLabel={t('explore_companions')}
+              actionHref="/companions"
+            />
+          </div>
+        ) : (
+          companions.map((companion: Companion) => (
+            <CompanionCard
+              key={companion.id}
+              {...companion}
+              color={getSubjectColor(companion.subject)}
+            />
+          ))
+        )}
       </section>
 
       <section
@@ -35,7 +54,7 @@ const HomePage = async () => {
       >
         <CompanionsList
           title={t('recently_completed_sessions')}
-          companions={recentSessionCompanions}
+          companions={showRecentEmpty ? [] : recentSessionCompanions}
           classNames="w-2/3 max-lg:w-full"
         />
 

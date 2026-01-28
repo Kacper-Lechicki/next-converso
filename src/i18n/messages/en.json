@@ -11,7 +11,12 @@
   },
   "HomePage": {
     "popular_companions": "Popular Companions",
-    "recently_completed_sessions": "Recently completed sessions"
+    "recently_completed_sessions": "Recently completed sessions",
+    "no_popular_companions": "No popular companions found",
+    "no_popular_companions_description": "We couldn't find any popular companions at the moment. Check back later or create your own!",
+    "no_recent_sessions": "No completed sessions yet",
+    "no_recent_sessions_description": "You haven't completed any sessions recently. Start a conversation with a companion to see your history here.",
+    "explore_companions": "Explore Companions"
   },
   "CompanionCard": {
     "bookmark_alt": "bookmark",
@@ -31,7 +36,9 @@
     "lessons": "Lessons",
     "subject": "Subject",
     "duration": "Duration",
-    "clock_alt": "minutes"
+    "clock_alt": "minutes",
+    "no_sessions": "No completed sessions yet",
+    "no_sessions_description": "You haven't completed any sessions recently. Start a conversation with a companion to see your history here."
   },
   "NewCompanionPage": {
     "companion_builder": "Companion Builder"
@@ -81,7 +88,9 @@
     "title": "Companions Library",
     "meta_title": "Companions Library | Converso",
     "meta_description": "Browse and select your AI learning companion.",
-    "add_companion": "Add Companion"
+    "add_companion": "Add Companion",
+    "no_companions_found": "No companions found",
+    "no_companions_description": "Try adjusting your search or filters to find what you're looking for, or create a new companion."
   },
   "CompanionSessionPage": {
     "minutes": "minutes",
