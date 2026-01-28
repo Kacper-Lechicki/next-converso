@@ -17,6 +17,7 @@ export interface Companion {
   duration: number;
   color: string;
   bookmarked?: boolean;
+  author?: string;
 }
 
 export interface CreateCompanion {
@@ -34,4 +35,8 @@ export interface GetAllCompanions {
   page?: number;
   subject?: string | string[];
   topic?: string | string[];
+}
+
+export interface UpdateCompanion extends Partial<CreateCompanion> {
+  id: string;
 }

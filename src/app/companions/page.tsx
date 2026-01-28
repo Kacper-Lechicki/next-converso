@@ -3,10 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { ASSETS } from '@/config/assets';
+import { currentUser } from '@clerk/nextjs/server';
 
 import { getAllCompanions } from '@/actions/companion';
 import CompanionCard from '@/components/feature/CompanionCard';
+import EmptyState from '@/components/feature/EmptyState';
 import SearchInput from '@/components/feature/SearchInput';
+
 import SubjectFilter from '@/components/feature/SubjectFilter';
 import { getSubjectColor } from '@/lib/utils';
 import { Companion, SearchParams } from '@/types';
@@ -21,11 +24,13 @@ export async function generateMetadata() {
 }
 
 const CompanionsLibraryPage = async ({ searchParams }: SearchParams) => {
+  const user = await currentUser();
   const t = await getTranslations('CompanionsPage');
   const filters = await searchParams;
   const subject = filters.subject ? (filters.subject as string) : '';
   const topic = filters.topic ? (filters.topic as string) : '';
   const companions = await getAllCompanions({ subject, topic });
+  const isEmpty = !companions || companions.length === 0;
 
   return (
     <div className="flex flex-col gap-8">
@@ -57,13 +62,24 @@ const CompanionsLibraryPage = async ({ searchParams }: SearchParams) => {
       </section>
 
       <section className="companions-grid">
-        {companions.map((companion: Companion) => (
-          <CompanionCard
-            key={companion.id}
-            {...companion}
-            color={getSubjectColor(companion.subject)}
-          />
-        ))}
+        {isEmpty ? (
+          <div className="col-span-full">
+            <EmptyState
+              title={t('no_companions_found')}
+              description={t('no_companions_description')}
+              icon={ASSETS.icons.search}
+            />
+          </div>
+        ) : (
+          companions.map((companion: Companion) => (
+            <CompanionCard
+              key={companion.id}
+              {...companion}
+              color={getSubjectColor(companion.subject)}
+              currentUserId={user?.id}
+            />
+          ))
+        )}
       </section>
     </div>
   );

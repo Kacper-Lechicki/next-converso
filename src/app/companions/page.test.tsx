@@ -24,6 +24,8 @@ vi.mock('next-intl/server', () => ({
 
 // Mock the backend action.
 // We assert that it returns a fixed list of 1 companion so we can verify rendering.
+// Mock the backend action.
+// We assert that it returns a fixed list of 1 companion so we can verify rendering.
 vi.mock('@/actions/companion', () => ({
   getAllCompanions: vi.fn().mockResolvedValue([
     {
@@ -35,6 +37,10 @@ vi.mock('@/actions/companion', () => ({
       color: '#fff',
     },
   ]),
+}));
+
+vi.mock('@clerk/nextjs/server', () => ({
+  currentUser: vi.fn().mockResolvedValue({ id: 'user_123' }),
 }));
 
 // Mock child feature components.

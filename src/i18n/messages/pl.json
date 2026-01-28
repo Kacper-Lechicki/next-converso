@@ -11,7 +11,12 @@
   },
   "HomePage": {
     "popular_companions": "Popularni Mentorzy",
-    "recently_completed_sessions": "Ostatnio zakończone sesje"
+    "recently_completed_sessions": "Ostatnio zakończone sesje",
+    "no_popular_companions": "Nie znaleziono popularnych mentorów",
+    "no_popular_companions_description": "W tej chwili nie znaleźliśmy żadnych popularnych mentorów. Sprawdź później lub stwórz własnego!",
+    "no_recent_sessions": "Brak zakończonych sesji",
+    "no_recent_sessions_description": "Nie ukończyłeś ostatnio żadnych sesji. Rozpocznij rozmowę z mentorem, aby zobaczyć tutaj swoją historię.",
+    "explore_companions": "Odkryj Mentorów"
   },
   "CompanionCard": {
     "bookmark_alt": "zakładka",
@@ -31,7 +36,9 @@
     "lessons": "Lekcje",
     "subject": "Przedmiot",
     "duration": "Czas trwania",
-    "clock_alt": "minuty"
+    "clock_alt": "minuty",
+    "no_sessions": "Brak zakończonych sesji",
+    "no_sessions_description": "Nie ukończyłeś ostatnio żadnych sesji. Rozpocznij rozmowę z mentorem, aby zobaczyć tutaj swoją historię."
   },
   "NewCompanionPage": {
     "companion_builder": "Kreator Mentora"
@@ -53,7 +60,8 @@
     "casual": "Swobodny",
     "duration": "Czas trwania",
     "estimated_duration": "Szacowany czas sesji w minutach",
-    "build_your_companion": "Stwórz Mentora"
+    "build_your_companion": "Stwórz Mentora",
+    "update_your_companion": "Zaktualizuj Mentora"
   },
   "Error": {
     "something_went_wrong": "Coś poszło nie tak. Spróbuj ponownie później.",
@@ -61,7 +69,8 @@
     "not_found": "Żądany zasób nie został znaleziony."
   },
   "Success": {
-    "saved": "Zapisano pomyślnie!"
+    "saved": "Zapisano pomyślnie!",
+    "error_saving": "Nie udało się zapisać zmian."
   },
   "SearchInput": {
     "placeholder": "Wyszukaj mentorów...",
@@ -81,7 +90,9 @@
     "title": "Biblioteka Mentorów",
     "meta_title": "Biblioteka Mentorów | Converso",
     "meta_description": "Przeglądaj i wybierz swojego mentora AI.",
-    "add_companion": "Dodaj Mentora"
+    "add_companion": "Dodaj Mentora",
+    "no_companions_found": "Nie znaleziono mentorów",
+    "no_companions_description": "Spróbuj zmienić wyszukiwanie lub filtry, albo stwórz nowego mentora."
   },
   "CompanionSessionPage": {
     "minutes": "minut",
@@ -89,12 +100,48 @@
     "duration_alt": "czas trwania",
     "mic_on": "Wyłącz mikrofon",
     "mic_off": "Włącz mikrofon",
+    "mic_on_short": "Wyłącz",
+    "mic_off_short": "Włącz",
     "mic_alt": "mikrofon",
     "start_session": "Rozpocznij sesję",
     "end_session": "Zakończ sesję",
     "connecting": "Łączenie...",
     "listening": "Słucham...",
     "transcript_placeholder": "Tutaj pojawi się transkrypcja...",
-    "download_transcript": "Pobierz transkrypcję"
+    "download_transcript": "Pobierz transkrypt",
+    "active_call_title": "Rozmowa w toku",
+    "active_call_description": "Trwa rozmowa z mentorem. Czy na pewno chcesz opuścić stronę?",
+    "leave": "Opuść",
+    "stay": "Zostań"
+  },
+  "ProfilePage": {
+    "lessons_completed": "Ukończone lekcje",
+    "companions_created": "Stworzeni mentorzy",
+    "check_alt": "znacznik wyboru",
+    "cap_alt": "czapka",
+    "recent_sessions": "Ostatnie sesje",
+    "my_companions": "Moi mentorzy",
+    "no_companions_found": "Nie znaleziono mentorów",
+    "no_companions_description": "Nie stworzyłeś jeszcze żadnych własnych mentorów."
+  },
+  "CompanionActions": {
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "companion_deleted": "Mentor został usunięty pomyślnie",
+    "delete_failed": "Nie udało się usunąć mentora",
+    "delete_title": "Usuń Mentora",
+    "delete_description": "Czy na pewno chcesz usunąć tego mentora? Tej operacji nie można cofnąć.",
+    "delete_confirm": "Usuń",
+    "cancel": "Anuluj"
+  },
+  "EditCompanionPage": {
+    "title": "Edytuj Mentora",
+    "description": "Wprowadź zmiany w swoim mentorze AI"
+  },
+  "CompanionEditor": {
+    "unsaved_changes_title": "Niezapisane zmiany",
+    "unsaved_changes_description": "Masz niezapisane zmiany. Czy na pewno chcesz opuścić tę stronę?",
+    "leave": "Opuść",
+    "stay": "Zostań"
   }
 }

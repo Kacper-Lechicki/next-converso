@@ -9,7 +9,10 @@ export const useServerAction = <T, R>(action: (data: T) => Promise<R>) => {
 
   const run = async (
     data: T,
-    options?: { onSuccess?: (result: R) => void },
+    options?: {
+      onSuccess?: (result: R) => void;
+      onError?: (error: unknown) => void;
+    },
   ) => {
     return new Promise<R | null>((resolve) => {
       startTransition(async () => {
@@ -27,6 +30,8 @@ export const useServerAction = <T, R>(action: (data: T) => Promise<R>) => {
             error instanceof Error ? error.message : 'something_went_wrong';
 
           toast.error(t(message));
+
+          options?.onError?.(error);
           resolve(null);
         }
       });

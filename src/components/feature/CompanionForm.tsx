@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { Resolver, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -27,13 +28,13 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-import { createCompanion } from '@/actions/companion';
+import { createCompanion, updateCompanion } from '@/actions/companion';
 import { Textarea } from '@/components/ui/textarea';
 import { SUBJECTS } from '@/config/app';
 import { useServerAction } from '@/hooks/use-server-action';
 import { Subject } from '@/types';
 
-const formSchema = z.object({
+export const formSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),
   subject: z.string().min(1, { message: 'Subject is required' }),
   topic: z.string().min(1, { message: 'Topic is required' }),
@@ -42,15 +43,27 @@ const formSchema = z.object({
   duration: z.coerce.number().min(1, { message: 'Duration is required' }),
 });
 
-type FormValues = z.infer<typeof formSchema>;
+export type FormValues = z.infer<typeof formSchema>;
 
-const CompanionForm = () => {
+export interface CompanionFormProps {
+  initialData?: FormValues | null;
+  companionId?: string;
+  onDirtyChange?: (isDirty: boolean) => void;
+  callbackUrl?: string;
+}
+
+const CompanionForm = ({
+  initialData,
+  companionId,
+  onDirtyChange,
+  callbackUrl,
+}: CompanionFormProps) => {
   const t = useTranslations('CompanionForm');
   const router = useRouter();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema) as Resolver<FormValues>,
-    defaultValues: {
+    defaultValues: initialData || {
       name: '',
       subject: '',
       topic: '',
@@ -60,23 +73,58 @@ const CompanionForm = () => {
     },
   });
 
-  const { run: createCompanionAction, isPending } =
+  useEffect(() => {
+    if (onDirtyChange) {
+      onDirtyChange(form.formState.isDirty);
+    }
+  }, [form.formState.isDirty, onDirtyChange]);
+
+  const { run: createCompanionAction, isPending: isCreating } =
     useServerAction(createCompanion);
 
+  const { run: updateCompanionAction, isPending: isUpdating } =
+    useServerAction(updateCompanion);
+
+  const isPending = isCreating || isUpdating;
   const tSuccess = useTranslations('Success');
 
   const onSubmit = async (values: FormValues) => {
-    await createCompanionAction(values, {
-      onSuccess: (companion) => {
-        toast.success(tSuccess('saved'));
+    if (initialData && companionId) {
+      await updateCompanionAction(
+        { ...values, id: companionId },
+        {
+          onSuccess: (companion) => {
+            toast.success(tSuccess('saved'));
 
-        if (companion) {
-          router.push(`/companions/${companion.id}`);
-        } else {
-          router.push('/');
-        }
-      },
-    });
+            if (callbackUrl) {
+              router.push(callbackUrl);
+            } else {
+              router.push(`/companions/${companion.id}`);
+            }
+
+            router.refresh();
+          },
+          onError: () => {
+            toast.error(tSuccess('error_saving'));
+          },
+        },
+      );
+    } else {
+      await createCompanionAction(values, {
+        onSuccess: (companion) => {
+          toast.success(tSuccess('saved'));
+
+          if (companion) {
+            router.push(`/companions/${companion.id}`);
+          } else {
+            router.push('/');
+          }
+        },
+        onError: () => {
+          toast.error(tSuccess('error_saving'));
+        },
+      });
+    }
   };
 
   return (
@@ -252,7 +300,7 @@ const CompanionForm = () => {
           type="submit"
           isLoading={isPending}
         >
-          {t('build_your_companion')}
+          {initialData ? t('update_your_companion') : t('build_your_companion')}
         </Button>
       </form>
     </Form>

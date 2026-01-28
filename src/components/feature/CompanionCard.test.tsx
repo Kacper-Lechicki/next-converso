@@ -46,6 +46,10 @@ vi.mock('@/config/assets', () => ({
   },
 }));
 
+vi.mock('@/components/feature/CompanionActions', () => ({
+  default: () => <div data-testid="companion-actions" />,
+}));
+
 // 2. TEST SUITE
 describe('CompanionCard', () => {
   // Define a mock companion object to be used across tests.

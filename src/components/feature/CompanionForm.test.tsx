@@ -25,6 +25,7 @@ vi.mock('sonner', () => ({
 // Mock the server action used for submission
 vi.mock('@/actions/companion', () => ({
   createCompanion: vi.fn(),
+  updateCompanion: vi.fn(),
 }));
 
 vi.mock('@/hooks/use-server-action', () => ({

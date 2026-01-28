@@ -3,7 +3,12 @@
 import { revalidatePath } from 'next/cache';
 
 import { createClient } from '@/lib/supabase/server';
-import { Companion, CreateCompanion, GetAllCompanions } from '@/types';
+import {
+  Companion,
+  CreateCompanion,
+  GetAllCompanions,
+  UpdateCompanion,
+} from '@/types';
 import { auth } from '@clerk/nextjs/server';
 import { z } from 'zod';
 
@@ -29,6 +34,70 @@ export const createCompanion = async (
   }
 
   return data;
+};
+
+export const updateCompanion = async ({ id, ...formData }: UpdateCompanion) => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error('User is not authenticated');
+  }
+
+  const supabase = createClient();
+
+  const { data: existingCompanion } = await supabase
+    .from('companions')
+    .select('author')
+    .eq('id', id)
+    .single();
+
+  if (!existingCompanion || existingCompanion.author !== userId) {
+    throw new Error('Unauthorized');
+  }
+
+  const { data, error } = await supabase
+    .from('companions')
+    .update(formData)
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  revalidatePath(`/companions/${id}`);
+  revalidatePath('/companions');
+
+  return data;
+};
+
+export const deleteCompanion = async (id: string) => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error('User is not authenticated');
+  }
+
+  const supabase = createClient();
+
+  const { data: existingCompanion } = await supabase
+    .from('companions')
+    .select('author')
+    .eq('id', id)
+    .single();
+
+  if (!existingCompanion || existingCompanion.author !== userId) {
+    throw new Error('Unauthorized');
+  }
+
+  const { error } = await supabase.from('companions').delete().eq('id', id);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  revalidatePath('/companions');
 };
 
 export const getAllCompanions = async ({
@@ -121,11 +190,17 @@ export const getRecentSessions = async (limit = 10): Promise<Companion[]> => {
     return [];
   }
 
-  return data
+  const companions = data
     .map(({ companions }) =>
       Array.isArray(companions) ? companions[0] : companions,
     )
     .filter((params) => !!params) as Companion[];
+
+  const uniqueCompanions = Array.from(
+    new Map(companions.map((c) => [c.id, c])).values(),
+  );
+
+  return uniqueCompanions;
 };
 
 export const getUserSessions = async (
@@ -145,9 +220,32 @@ export const getUserSessions = async (
     return [];
   }
 
-  return data
+  const companions = data
     .map(({ companions }) =>
       Array.isArray(companions) ? companions[0] : companions,
     )
     .filter((params) => !!params) as Companion[];
+
+  const uniqueCompanions = Array.from(
+    new Map(companions.map((c) => [c.id, c])).values(),
+  );
+
+  return uniqueCompanions;
+};
+
+export const getUserCompanions = async (
+  userId: string,
+): Promise<Companion[]> => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('companions')
+    .select('*')
+    .eq('author', userId);
+
+  if (error) {
+    return [];
+  }
+
+  return (data as Companion[]) || [];
 };
