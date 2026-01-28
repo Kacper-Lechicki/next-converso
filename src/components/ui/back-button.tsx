@@ -16,12 +16,14 @@ interface BackButtonProps {
     | 'ghost'
     | 'link';
   className?: string;
+  onClick?: () => void;
 }
 
 const BackButton = ({
   label,
   variant = 'ghost',
   className,
+  onClick,
 }: BackButtonProps) => {
   const router = useRouter();
   const t = useTranslations('Common');
@@ -29,7 +31,7 @@ const BackButton = ({
   return (
     <Button
       variant={variant}
-      onClick={() => router.back()}
+      onClick={onClick || (() => router.back())}
       className={className}
     >
       <ArrowLeft className="h-4 w-4" />

@@ -3,7 +3,7 @@
 import { Pencil, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -18,6 +18,7 @@ interface CompanionActionsProps {
 
 const CompanionActions = ({ companionId }: CompanionActionsProps) => {
   const router = useRouter();
+  const pathname = usePathname();
   const t = useTranslations('CompanionActions');
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -39,14 +40,17 @@ const CompanionActions = ({ companionId }: CompanionActionsProps) => {
 
   return (
     <>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mr-1">
         <Button
           variant="ghost"
           size="icon"
           asChild
           className="hover:bg-black/10"
         >
-          <Link href={`/companions/${companionId}/edit`} aria-label={t('edit')}>
+          <Link
+            href={`/companions/${companionId}/edit?callbackUrl=${encodeURIComponent(pathname)}`}
+            aria-label={t('edit')}
+          >
             <Pencil className="size-4" />
           </Link>
         </Button>

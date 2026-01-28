@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { Resolver, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -33,7 +34,7 @@ import { SUBJECTS } from '@/config/app';
 import { useServerAction } from '@/hooks/use-server-action';
 import { Subject } from '@/types';
 
-const formSchema = z.object({
+export const formSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),
   subject: z.string().min(1, { message: 'Subject is required' }),
   topic: z.string().min(1, { message: 'Topic is required' }),
@@ -42,14 +43,21 @@ const formSchema = z.object({
   duration: z.coerce.number().min(1, { message: 'Duration is required' }),
 });
 
-type FormValues = z.infer<typeof formSchema>;
+export type FormValues = z.infer<typeof formSchema>;
 
-interface CompanionFormProps {
+export interface CompanionFormProps {
   initialData?: FormValues | null;
   companionId?: string;
+  onDirtyChange?: (isDirty: boolean) => void;
+  callbackUrl?: string;
 }
 
-const CompanionForm = ({ initialData, companionId }: CompanionFormProps) => {
+const CompanionForm = ({
+  initialData,
+  companionId,
+  onDirtyChange,
+  callbackUrl,
+}: CompanionFormProps) => {
   const t = useTranslations('CompanionForm');
   const router = useRouter();
 
@@ -64,6 +72,12 @@ const CompanionForm = ({ initialData, companionId }: CompanionFormProps) => {
       duration: 15,
     },
   });
+
+  useEffect(() => {
+    if (onDirtyChange) {
+      onDirtyChange(form.formState.isDirty);
+    }
+  }, [form.formState.isDirty, onDirtyChange]);
 
   const { run: createCompanionAction, isPending: isCreating } =
     useServerAction(createCompanion);
@@ -81,7 +95,13 @@ const CompanionForm = ({ initialData, companionId }: CompanionFormProps) => {
         {
           onSuccess: (companion) => {
             toast.success(tSuccess('saved'));
-            router.push(`/companions/${companion.id}`);
+
+            if (callbackUrl) {
+              router.push(callbackUrl);
+            } else {
+              router.push(`/companions/${companion.id}`);
+            }
+
             router.refresh();
           },
           onError: () => {

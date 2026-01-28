@@ -190,11 +190,17 @@ export const getRecentSessions = async (limit = 10): Promise<Companion[]> => {
     return [];
   }
 
-  return data
+  const companions = data
     .map(({ companions }) =>
       Array.isArray(companions) ? companions[0] : companions,
     )
     .filter((params) => !!params) as Companion[];
+
+  const uniqueCompanions = Array.from(
+    new Map(companions.map((c) => [c.id, c])).values(),
+  );
+
+  return uniqueCompanions;
 };
 
 export const getUserSessions = async (
@@ -214,11 +220,17 @@ export const getUserSessions = async (
     return [];
   }
 
-  return data
+  const companions = data
     .map(({ companions }) =>
       Array.isArray(companions) ? companions[0] : companions,
     )
     .filter((params) => !!params) as Companion[];
+
+  const uniqueCompanions = Array.from(
+    new Map(companions.map((c) => [c.id, c])).values(),
+  );
+
+  return uniqueCompanions;
 };
 
 export const getUserCompanions = async (

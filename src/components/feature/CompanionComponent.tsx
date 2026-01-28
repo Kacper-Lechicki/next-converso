@@ -18,6 +18,7 @@ interface CompanionComponentProps extends Companion {
   userImage: string;
   style?: string;
   voice?: string;
+  onCallStatusChange?: (status: CallStatus) => void;
 }
 
 const CompanionComponent = ({
@@ -29,6 +30,7 @@ const CompanionComponent = ({
   userImage,
   style,
   voice,
+  onCallStatusChange,
 }: CompanionComponentProps) => {
   const t = useTranslations('CompanionSessionPage');
 
@@ -70,6 +72,12 @@ const CompanionComponent = ({
       }
     }
   }, [isSpeaking]);
+
+  useEffect(() => {
+    if (onCallStatusChange) {
+      onCallStatusChange(callStatus);
+    }
+  }, [callStatus, onCallStatusChange]);
 
   const handleDownloadTranscript = () => {
     downloadTranscript({ messages, userName, companionName: name });
@@ -159,7 +167,7 @@ const CompanionComponent = ({
                 height={24}
               />
               <span className="font-bold text-sm">
-                {isMuted ? 'Turn on' : 'Turn off'}
+                {isMuted ? t('mic_off_short') : t('mic_on_short')}
               </span>
             </div>
           </button>

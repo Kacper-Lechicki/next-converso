@@ -3,16 +3,21 @@ import { getTranslations } from 'next-intl/server';
 import { redirect } from 'next/navigation';
 
 import { getCompanion } from '@/actions/companion';
-import CompanionForm from '@/components/feature/CompanionForm';
+import CompanionEditor from '@/components/feature/CompanionEditor';
 
 interface EditCompanionPageProps {
   params: Promise<{
     id: string;
   }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-const EditCompanionPage = async ({ params }: EditCompanionPageProps) => {
+const EditCompanionPage = async ({
+  params,
+  searchParams,
+}: EditCompanionPageProps) => {
   const { id } = await params;
+  const { callbackUrl } = await searchParams;
   const user = await currentUser();
   const t = await getTranslations('EditCompanionPage');
 
@@ -31,24 +36,19 @@ const EditCompanionPage = async ({ params }: EditCompanionPageProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-8 max-w-2xl mx-auto w-full">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold">{t('title')}</h1>
-        <p className="text-muted-foreground">{t('description')}</p>
-      </div>
-
-      <CompanionForm
-        initialData={{
-          name: companion.name,
-          subject: companion.subject as string,
-          topic: companion.topic,
-          voice: companion.voice || '',
-          style: companion.style || '',
-          duration: companion.duration,
-        }}
-        companionId={companion.id}
-      />
-    </div>
+    <CompanionEditor
+      title={t('title')}
+      initialData={{
+        name: companion.name,
+        subject: companion.subject as string,
+        topic: companion.topic,
+        voice: companion.voice || '',
+        style: companion.style || '',
+        duration: companion.duration,
+      }}
+      companionId={companion.id}
+      callbackUrl={callbackUrl as string}
+    />
   );
 };
 

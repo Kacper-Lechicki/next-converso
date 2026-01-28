@@ -100,12 +100,19 @@
     "duration_alt": "duration",
     "mic_on": "Turn off microphone",
     "mic_off": "Turn on microphone",
+    "mic_on_short": "Turn off",
+    "mic_off_short": "Turn on",
     "mic_alt": "microphone",
     "start_session": "Start Session",
     "end_session": "End Session",
     "connecting": "Connecting...",
     "listening": "Listening...",
-    "transcript_placeholder": "Transcript will appear here..."
+    "transcript_placeholder": "Transcript will appear here...",
+    "download_transcript": "Download Transcript",
+    "active_call_title": "Active Call",
+    "active_call_description": "You are currently in a call. Are you sure you want to leave?",
+    "leave": "Leave",
+    "stay": "Stay"
   },
   "ProfilePage": {
     "lessons_completed": "Lessons completed",
@@ -130,5 +137,11 @@
   "EditCompanionPage": {
     "title": "Edit Companion",
     "description": "Make changes to your AI learning companion"
+  },
+  "CompanionEditor": {
+    "unsaved_changes_title": "Unsaved Changes",
+    "unsaved_changes_description": "You have unsaved changes. Are you sure you want to leave?",
+    "leave": "Leave",
+    "stay": "Stay"
   }
 }
